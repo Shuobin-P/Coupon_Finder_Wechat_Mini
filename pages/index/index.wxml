@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+<view class = "icon-father">
+    <view id="icon-box-meishi">
+    <icon class="iconfont icon-meishi"></icon>
+      <view class="icon-box-title">美食</view>
+    </view>
+
+    <view id="icon-box-yinliao">
+    <icon class="iconfont icon-yinliao"></icon>
+      <view class="icon-box-title">饮品</view>
+    </view>
+
+    <view class="icon-box">
+    <icon class="iconfont icon-gengduo"></icon>
+      <view class="icon-box-title">更多</view>
+    </view>
+</view>
+<van-button type="default">默认按钮</van-button>
+</view>
