@@ -1,20 +1,11 @@
 <!--index.wxml-->
 <view class="container">
-<view class = "icon-father">
-    <view id="icon-box-meishi">
-    <icon class="iconfont icon-meishi"></icon>
-      <view class="icon-box-title">美食</view>
-    </view>
 
-    <view id="icon-box-yinliao">
-    <icon class="iconfont icon-yinliao"></icon>
-      <view class="icon-box-title">饮品</view>
-    </view>
+    <van-tabs active="{{ active }}" bind:change="onChange" animated
+    custom-class="my-tabs">
+        <van-tab title="美食">内容 1</van-tab>
+        <van-tab title="饮品">内容 2</van-tab>
+        <van-tab title="更多">内容 3</van-tab>
+    </van-tabs>
 
-    <view class="icon-box">
-    <icon class="iconfont icon-gengduo"></icon>
-      <view class="icon-box-title">更多</view>
-    </view>
-</view>
-<van-button type="default">默认按钮</van-button>
 </view>
