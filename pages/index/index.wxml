@@ -3,10 +3,25 @@
 
     <van-tabs active="{{ active }}" bind:change="onChange" animated custom-class="my-tabs">
         <van-tab title="美食">
-            <van-card num="{{ number }}" origin-price= "1000" price="3.00" desc="描述信息" title="商品标题" thumb="{{ imageURL }}" />
+            <van-card 
+            num="{{ number }}" 
+            origin-price= "1000" price="3.00" desc="描述信息" title="商品标题" 
+            thumb="{{ imageURL }}" 
+             />
         </van-tab>
-        <van-tab title="饮品">内容 2</van-tab>
-        <van-tab title="更多">内容 3</van-tab>
+        <van-tab title="饮品">
+        <van-card  
+            wx:for="{{cardList}}"
+            num="{{ number }}" 
+            origin-price= "{{item.originPrice}}" 
+            price="{{item.price}}"
+            desc="描述信息" 
+            title="{{item.title}}" 
+            thumb="{{ imageURL }}" />
+            <van-empty wx:if="{{ cardList.length <= 0 }}"
+            description="暂无数据" />
+        </van-tab>
+        <van-tab title="其它">内容 3</van-tab>
     </van-tabs>
 
 </view>

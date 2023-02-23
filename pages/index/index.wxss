@@ -4,5 +4,5 @@
     padding-top: 100rpx;
 }
 .my-tabs van-tab {
-    margin-left: 20rpx;
+    margin-left: 10rpx;
   }
