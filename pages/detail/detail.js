@@ -12,7 +12,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        const {id} = options;
+        console.log(id);
+        //TODO 去后台请求id对应的数据
     },
 
     /**

@@ -122,4 +122,9 @@ Page({
         // 加载下一页数据
         this.getMoreDrinkData();
     },
+    toDetail(event) {
+		wx.navigateTo({
+			url: `/pages/detail/detail?id=${event.target.dataset.id}`
+		});
+	},
 })

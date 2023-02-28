@@ -24,6 +24,9 @@
                 desc="{{item.description}}"
                 title="{{item.title}}"
                 thumb="{{ item.pictureUrl }}" >
+                <view slot="footer">
+					<van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toDetail">查看详情</van-button>
+				</view>
             </van-card>
             <van-empty wx:if="{{ cardList.length <= 0 }}" description="暂无数据" />
         </van-tab>
