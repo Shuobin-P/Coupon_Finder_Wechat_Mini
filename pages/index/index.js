@@ -30,11 +30,10 @@ Page({
             //数据为切换到美食tab，再切换回来，cardList中的数据要清空
             this.setData({
                 cardList: [],
+                pageNum: 1
             })
-            //FIXME: 这里不能直接调用这个，因为每次调用pageNum就会加1
-            //只要改页面没有被销毁，每次调用getDrinkData()就会导致
-            //pageNum加1
-            this.getDrinkData();
+
+            this.getInitDrinkData();
             
         }
     },
@@ -54,7 +53,34 @@ Page({
     onShow() {
         //onLoad和onShow如果都调用getDrinkData则会出现数据重复的问题
     },
-    getDrinkData() {
+    getInitDrinkData() {
+        wx.showLoading({
+            title: '加载中...',
+        })
+        let _this = this;
+        wx.request({
+            url: 'http://localhost:8080/coupon/getHotCoupons', // 后台 API 地址
+            data: {
+                pageNum: 1,
+                pageSize: this.data.pageSize,
+            },
+            success(res) {
+                wx.hideLoading();
+                _this.setData({
+                    ["cardList"]: res.data.data,
+                    ["hasMore"]: res.data.data.length >= _this.data.pageSize,
+                })
+            },
+            fail(err) {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '加载失败，请重试',
+                    icon: 'none',
+                })
+            }
+        })
+    },
+    getMoreDrinkData() {
         if (!this.data.hasMore) {
             return
         }
@@ -66,7 +92,7 @@ Page({
         wx.request({
             url: 'http://localhost:8080/coupon/getHotCoupons', // 后台 API 地址
             data: {
-                pageNum: this.data.pageNum,
+                pageNum: this.data.pageNum + 1,
                 pageSize: this.data.pageSize,
             },
             header: {
@@ -94,6 +120,6 @@ Page({
     // 上滑触底事件
     onReachBottom() {
         // 加载下一页数据
-        this.getDrinkData()
+        this.getMoreDrinkData();
     },
 })

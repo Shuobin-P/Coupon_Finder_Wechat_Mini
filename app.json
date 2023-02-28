@@ -2,8 +2,7 @@
     "pages": [
         "pages/index/index",
         "pages/logs/logs",
-        "pages/test",
-        "pages/test/test"
+        "pages/detail/detail"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -14,5 +13,5 @@
     "sitemapLocation": "sitemap.json",
     "usingComponents": {
         "van-button": "@vant/weapp/button/index"
-      }
+    }
 }

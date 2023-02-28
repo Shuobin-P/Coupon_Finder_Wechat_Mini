@@ -13,7 +13,7 @@
                 thumb="{{ imageURL }}" >
             </van-card>
         </van-tab>
-<!-- 这里有问题，因为明明后台只有两条数据，但是wxml却显示3条数据 -->
+
         <van-tab title="饮品">
             <van-card 
                 wx:if="{{ cardList.length > 0 }}"
@@ -21,7 +21,7 @@
                 num="剩余数量：{{item.totalQuantity-item.usedQuantity}}"
                 origin-price= "{{item.originalPrice}}"
                 price="{{item.presentPrice}}"
-                desc="描述信息"
+                desc="{{item.description}}"
                 title="{{item.title}}"
                 thumb="{{ item.pictureUrl }}" >
             </van-card>
