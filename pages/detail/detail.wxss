@@ -5,8 +5,8 @@ swiper-item image {
 }
 
 .detail {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     margin-top: 15rpx;
     margin-bottom: 0rpx;
 }
@@ -19,9 +19,27 @@ swiper-item image {
 }
 
 .detail .present-price {
-    /* display: flex; */
-    /* flex-direction: row; */
     color: red;
     font-size: 40rpx;
     margin: 10rpx;
 }
+.test{
+    display: flex;
+}
+.test .price {
+    width: 50%
+}
+.amount .used-amount{
+    color: red;
+    font-size: 40rpx;
+    margin: 10rpx;
+}
+.goodsDetailPicturesTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image_detail {
+    width: 100%;
+  }

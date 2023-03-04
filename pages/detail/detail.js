@@ -5,10 +5,22 @@ Page({
      * 页面的初始数据
      */
     data: {
-        images: [
+        bannerImages: [
             "https://img95.699pic.com/photo/50075/6447.jpg_wh300.jpg",
         ],
+        title:"默认标题",
+        present_price: -1,
+        original_price: -1,
+        total_quantity: -1,
+        used_quantity: -1,
+        start_date: "1999-01-01",
+        expire_date: "3000-01-01",
+        address: "默认地址",
         indicatorDots: true,
+        detailImages: [
+            "https://img95.699pic.com/photo/50075/6447.jpg_wh300.jpg",
+            "https://img95.699pic.com/photo/50075/6447.jpg_wh300.jpg"
+        ],
     },
 
     /**
@@ -18,8 +30,9 @@ Page({
         const {
             id
         } = options;
-        console.log(id);
         //TODO 去后台请求id对应的数据
+        let couponID = id;
+        this.getCouponDetail(couponID);
     },
 
     /**
@@ -69,5 +82,39 @@ Page({
      */
     onShareAppMessage() {
 
+    },
+    onClickHomeIcon() {
+        wx.navigateTo({
+            url: '/pages/index/index',
+        })
+    },
+    getCouponDetail(couponID) {
+        let _this = this;
+        wx.request({
+            url: 'http://localhost:8080/coupon/getCouponInfo', // 后台 API 地址
+            data: {
+                id: couponID,
+            },
+            success(res) {
+                wx.hideLoading();
+                _this.setData({
+                    bannerImages: _this.data.pictureUrl,
+                    title: _this.data.title,
+                    present_price: _this.data.presentPrice,
+                    original_price: _this.data.originalPrice,
+                    used_quantity: _this.data.usedQuantity,
+                    total_quantity: _this.data.totalQuantity
+                })
+            },
+            fail(err) {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '加载失败，请重试',
+                    icon: 'none',
+                })
+            }
+        })
+       
     }
+
 })
