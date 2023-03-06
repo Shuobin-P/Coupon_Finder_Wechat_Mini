@@ -15,19 +15,19 @@
             <view class="test">
                 <view class="price">
                     <view class="present-price">
-                        <text>券后价：￥500</text>
+                        <text>券后价：￥{{presentPrice}}</text>
                     </view>
                     <view class="origin-price">
-                        <text>原价：￥500</text>
+                        <text>原价：￥{{originalPrice}}</text>
                     </view>
                 </view>
 
                 <view class="amount">
                     <view class="used-amount">
-                        <text>已使用：500张</text>
+                        <text>已使用：{{usedQuantity}}张</text>
                     </view>
                     <view class="left-amount">
-                        <text>剩余：500张</text>
+                        <text>剩余：{{totalQuantity-usedQuantity}}张</text>
                     </view>
                 </view>
             </view>

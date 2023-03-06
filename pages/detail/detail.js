@@ -9,12 +9,12 @@ Page({
             "https://img95.699pic.com/photo/50075/6447.jpg_wh300.jpg",
         ],
         title:"默认标题",
-        present_price: -1,
-        original_price: -1,
-        total_quantity: -1,
-        used_quantity: -1,
-        start_date: "1999-01-01",
-        expire_date: "3000-01-01",
+        presentPrice: -1,
+        originalPrice: -1,
+        totalQuantity: -1,
+        usedQuantity: -1,
+        startDate: "1999-01-01",
+        expireDate: "3000-01-01",
         address: "默认地址",
         indicatorDots: true,
         detailImages: [
@@ -88,6 +88,11 @@ Page({
             url: '/pages/index/index',
         })
     },
+    onClickPacketIcon() {
+        wx.navigateTo({
+            url: '/pages/wallet/wallet',
+        })
+    },
     getCouponDetail(couponID) {
         let _this = this;
         wx.request({
@@ -98,12 +103,16 @@ Page({
             success(res) {
                 wx.hideLoading();
                 _this.setData({
-                    bannerImages: _this.data.pictureUrl,
-                    title: _this.data.title,
-                    present_price: _this.data.presentPrice,
-                    original_price: _this.data.originalPrice,
-                    used_quantity: _this.data.usedQuantity,
-                    total_quantity: _this.data.totalQuantity
+                    bannerImages: [res.data.data.pictureUrl],
+                    title: res.data.data.title,
+                    presentPrice: res.data.data.presentPrice,
+                    originalPrice: res.data.data.originalPrice,
+                    usedQuantity: res.data.data.usedQuantity,
+                    totalQuantity: res.data.data.totalQuantity,
+                    detailImages: res.data.data.images,
+                    address: res.data.data.address,
+                    startDate: res.data.data.startDate,
+                    expireDate: res.data.data.expireDate
                 })
             },
             fail(err) {

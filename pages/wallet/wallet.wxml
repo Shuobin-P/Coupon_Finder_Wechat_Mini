@@ -1,0 +1,26 @@
+<!--pages/wallet/wallet.wxml-->
+<!-- 可以使用滑动vant weapp中的 
+    Cell 单元格 
+    SwipeCell Card 
+    商品卡片 -->
+<van-tabs active="{{ active }}" bind:change="onChange">
+    <van-tab title="可使用优惠券">
+        <van-swipe-cell right-width="{{ 65 }}" left-width="{{ 0 }}">
+            <view slot="left">选择</view>
+            <van-cell-group>
+                <van-card num="1" price="2.00" desc="{{desc}}" title="{{title}}" thumb="{{ imageURL }}">
+                    <view slot="footer">
+                        <van-button size="mini">二维码</van-button>
+                    </view>
+                </van-card>
+            </van-cell-group>
+            <view slot="right" class="right">
+                <van-button type="danger" bind:click="onDelete">
+                    删除
+                </van-button>
+            </view>
+        </van-swipe-cell>
+
+    </van-tab>
+    <van-tab title="使用记录">内容 2</van-tab>
+</van-tabs>
