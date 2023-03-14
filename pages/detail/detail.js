@@ -5,10 +5,10 @@ Page({
      * 页面的初始数据
      */
     data: {
+        id: -1,
         bannerImages: [
-            "https://img95.699pic.com/photo/50075/6447.jpg_wh300.jpg",
         ],
-        title:"默认标题",
+        title: "默认标题",
         presentPrice: -1,
         originalPrice: -1,
         totalQuantity: -1,
@@ -17,10 +17,7 @@ Page({
         expireDate: "3000-01-01",
         address: "默认地址",
         indicatorDots: true,
-        detailImages: [
-            "https://img95.699pic.com/photo/50075/6447.jpg_wh300.jpg",
-            "https://img95.699pic.com/photo/50075/6447.jpg_wh300.jpg"
-        ],
+        detailImages: [],
     },
 
     /**
@@ -32,6 +29,9 @@ Page({
         } = options;
         //TODO 去后台请求id对应的数据
         let couponID = id;
+        this.setData({
+            id: couponID
+        });
         this.getCouponDetail(couponID);
     },
 
@@ -93,6 +93,40 @@ Page({
             url: '/pages/wallet/wallet',
         })
     },
+    onClickGetCouponButton() {
+        let _this = this;
+        console.log("优惠券ID:"+ this.data.id);
+        wx.showLoading({
+            title: '领取中...',
+        });
+        wx.request({
+            url: 'http://localhost:8080/coupon/getCoupon',
+            data: {
+                couponId: _this.data.id,
+            },
+            success: res => {
+                wx.hideLoading();
+                if (res.result.success) {
+                    wx.showToast({
+                        title: '领取成功',
+                    });
+                } else {
+                    wx.showToast({
+                        title: res.result.message,
+                        icon: 'none',
+                    });
+                }
+            },
+            fail: err => {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '领取失败',
+                    icon: 'none',
+                });
+            }
+        });
+    },
+
     getCouponDetail(couponID) {
         let _this = this;
         wx.request({
@@ -123,7 +157,7 @@ Page({
                 })
             }
         })
-       
+
     }
 
 })

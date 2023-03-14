@@ -3,17 +3,23 @@
     Cell 单元格 
     SwipeCell Card 
     商品卡片 -->
-<van-tabs active="{{ active }}" bind:change="onChange">
+    <van-tabs active="{{ active }}" bind:change="onChange">
     <van-tab title="可使用优惠券">
-        <van-swipe-cell right-width="{{ 65 }}" left-width="{{ 0 }}">
+        <van-swipe-cell right-width="{{ 65 }}" left-width="{{ 0 }}" wx:for="{{cardList}}">
             <view slot="left">选择</view>
             <van-cell-group>
-                <van-card num="1" price="2.00" desc="{{desc}}" title="{{title}}" thumb="{{ imageURL }}">
+                <van-card 
+                desc="{{item.description}}" 
+                num="1" 
+                price="{{item.originalPrice - item.presentPrice}}"
+                title="{{item.title}}"
+                thumb="{{ item.pictureUrl }}">
                     <view slot="footer">
                         <van-button size="mini">二维码</van-button>
                     </view>
                 </van-card>
             </van-cell-group>
+
             <view slot="right" class="right">
                 <van-button type="danger" bind:click="onDelete">
                     删除

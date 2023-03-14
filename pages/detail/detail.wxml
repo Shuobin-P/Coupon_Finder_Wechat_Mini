@@ -50,6 +50,6 @@
     <van-goods-action>
         <van-goods-action-icon icon="home-o" text="主页" bind:click="onClickHomeIcon" />
         <van-goods-action-icon icon="coupon-o" text="卡包" bind:click="onClickPacketIcon" />
-        <van-goods-action-button text="立即领取" bind:click="onClickButton" />
+        <van-goods-action-button text="立即领取" bind:click="onClickGetCouponButton" />
     </van-goods-action>
 </view>

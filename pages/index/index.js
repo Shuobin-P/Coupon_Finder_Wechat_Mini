@@ -64,6 +64,9 @@ Page({
                 pageNum: 1,
                 pageSize: this.data.pageSize,
             },
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
             success(res) {
                 wx.hideLoading();
                 _this.setData({
@@ -96,7 +99,8 @@ Page({
                 pageSize: this.data.pageSize,
             },
             header: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'Authorization': wx.getStorageSync('token')
             },
             success(res) {
                 wx.hideLoading();
