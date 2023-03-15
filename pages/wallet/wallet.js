@@ -13,7 +13,7 @@ Page({
         //请求后台接口，传入用户的账号信息，返回该用户拥有的有效优惠券
         this.getInitDrinkData();
     },
-    getMoreAvailableCouponData(){
+    getMoreAvailableCouponData() {
         if (!this.data.hasMore) {
             return
         }
@@ -22,7 +22,7 @@ Page({
         })
         let _this = this;
         wx.request({
-            url: 'http://localhost:8080/wallet/getAvailableCoupons', 
+            url: 'http://localhost:8080/wallet/getAvailableCoupons',
             data: {
                 pageNum: this.data.pageNum + 1,
                 pageSize: this.data.pageSize,
@@ -86,5 +86,32 @@ Page({
         // 加载下一页数据
         this.getMoreAvailableCouponData();
     },
-}, 
-)
+    onDelete(event) {
+        //点击事件
+        const {
+            index,
+            id
+        } = event.currentTarget.dataset;
+        const {
+            cardList
+        } = this.data;
+
+        //TODO 调用后台删除接口，删除数据
+        console.log("CouponID:"+id);
+        wx.request({
+            url: 'url',
+            method: "DELETE",
+            success(res) {
+
+            },
+            fail(res) {
+
+            }
+        })
+        cardList.splice(index, 1);
+        this.setData({
+            cardList
+        });
+    }
+
+}, )

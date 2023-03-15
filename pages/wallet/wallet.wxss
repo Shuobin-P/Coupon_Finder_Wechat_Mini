@@ -1,5 +1,5 @@
 /* pages/wallet/wallet.wxss */
-.right{
+/* .right{
     background-color: red;
     height: inherit;
     width: 65px;
@@ -7,4 +7,4 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
