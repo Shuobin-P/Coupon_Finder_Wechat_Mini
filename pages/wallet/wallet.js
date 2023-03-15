@@ -99,13 +99,24 @@ Page({
         //TODO 调用后台删除接口，删除数据
         console.log("CouponID:"+id);
         wx.request({
-            url: 'url',
-            method: "DELETE",
+            url: 'http://localhost:8080/wallet/deleteCoupon',
+            data:{
+                id: id
+            },
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
             success(res) {
-
+                wx.showToast({
+                    title: '成功删除优惠券！',
+                    icon: 'success',
+                })
             },
             fail(res) {
-
+                wx.showToast({
+                    title: '删除失败，请重试',
+                    icon: 'none',
+                })
             }
         })
         cardList.splice(index, 1);
