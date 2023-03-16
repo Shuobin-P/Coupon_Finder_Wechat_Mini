@@ -18,7 +18,7 @@
             <van-card 
                 wx:if="{{ cardList.length > 0 }}"
                 wx:for="{{cardList}}"
-                num="剩余数量：{{item.totalQuantity-item.usedQuantity}}"
+                num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}"
                 origin-price= "{{item.originalPrice}}"
                 price="{{item.presentPrice}}"
                 desc="{{item.description}}"

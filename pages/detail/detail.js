@@ -104,15 +104,18 @@ Page({
             data: {
                 couponId: _this.data.id,
             },
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
             success: res => {
                 wx.hideLoading();
-                if (res.result.success) {
+                if (res.data.code===200) {
                     wx.showToast({
                         title: '领取成功',
                     });
-                } else {
+                } else if(res.data.code===400){
                     wx.showToast({
-                        title: res.result.message,
+                        title: "您已经领取该优惠券，不能重复领取哦！",
                         icon: 'none',
                     });
                 }
