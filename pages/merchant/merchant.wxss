@@ -1,3 +1,4 @@
+/* pages/merchant/merchant.wxss */
 .container view {
     height: 100rpx;
 }

@@ -1,4 +1,4 @@
-// pages/home/home.js
+// pages/merchant/merchant.js
 Page({
 
     /**
@@ -63,14 +63,16 @@ Page({
     onShareAppMessage() {
 
     },
-    toWallet() {
-        wx.navigateTo({
-            url: '/pages/wallet/wallet',
-        })
-    },
-    toMerchat() {
-        wx.navigateTo({
-            url: '/pages/merchant/merchant',
+    scanQRcode() {
+        wx.scanCode({
+            success(res) {
+                console.log(res);
+                wx.showToast({
+                    title: res.result,
+                    icon: 'success',
+                    duration: 2000
+                  })
+            }
         })
     }
 })

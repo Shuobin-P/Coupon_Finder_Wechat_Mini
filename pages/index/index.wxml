@@ -19,5 +19,5 @@
 
 <van-tabbar active="{{ active }}" bind:change="onChange">
     <van-tabbar-item icon="home-o">主页</van-tabbar-item>
-    <van-tabbar-item icon="user-circle-o">我</van-tabbar-item>
+    <van-tabbar-item icon="user-circle-o" bindtap="toProfile">我</van-tabbar-item>
 </van-tabbar>

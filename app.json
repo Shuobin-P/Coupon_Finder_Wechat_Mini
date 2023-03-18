@@ -4,13 +4,14 @@
         "pages/logs/logs",
         "pages/detail/detail",
         "pages/wallet/wallet",
-        "pages/home/home"
+        "pages/home/home",
+        "pages/merchant/merchant"
     ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "Coupon Finder",
-        "navigationBarTextStyle": "black"
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "Coupon Finder"
     },
     "sitemapLocation": "sitemap.json",
     "usingComponents": {

@@ -130,5 +130,10 @@ Page({
 		wx.navigateTo({
 			url: `/pages/detail/detail?id=${event.target.dataset.id}`
 		});
-	},
+    },
+    toProfile(event) {
+        wx.navigateTo({
+            url: `/pages/home/home`
+        })
+    }
 })

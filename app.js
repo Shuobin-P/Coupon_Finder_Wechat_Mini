@@ -39,6 +39,6 @@ App({
         })
     },
     globalData: {
-        url: "http://localhost:8080"
+        url: "http://172.20.10.4:8080"
     }
 })
