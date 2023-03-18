@@ -59,7 +59,7 @@ Page({
         })
         let _this = this;
         wx.request({
-            url: 'http://localhost:8080/coupon/getHotCoupons', // 后台 API 地址
+            url: app.globalData.url+'/coupon/getHotCoupons', // 后台 API 地址
             data: {
                 pageNum: 1,
                 pageSize: this.data.pageSize,
@@ -93,7 +93,7 @@ Page({
 
         let _this = this;
         wx.request({
-            url: 'http://localhost:8080/coupon/getHotCoupons', // 后台 API 地址
+            url: app.globalData.url+'/coupon/getHotCoupons', // 后台 API 地址
             data: {
                 pageNum: this.data.pageNum + 1,
                 pageSize: this.data.pageSize,

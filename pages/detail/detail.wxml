@@ -27,7 +27,7 @@
                         <text>已使用：{{usedQuantity}}张</text>
                     </view>
                     <view class="left-amount">
-                        <text>剩余：{{totalQuantity-usedQuantity}}张</text>
+                        <text>剩余：{{totalQuantity-usedQuantity-collectedQuantity}}张</text>
                     </view>
                 </view>
             </view>

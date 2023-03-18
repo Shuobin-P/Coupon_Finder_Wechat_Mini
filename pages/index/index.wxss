@@ -1,8 +1,4 @@
 /**index.wxss**/
-.container{
-    margin-top: 0px;
-    padding-top: 100rpx;
+.to_fill_content {
+    height: 150rpx;
 }
-.my-tabs van-tab {
-    margin-left: 10rpx;
-  }

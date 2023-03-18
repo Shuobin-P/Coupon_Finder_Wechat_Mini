@@ -1,4 +1,6 @@
 // pages/detail/detail.js
+const app = getApp()
+
 Page({
 
     /**
@@ -13,6 +15,7 @@ Page({
         originalPrice: -1,
         totalQuantity: -1,
         usedQuantity: -1,
+        collectedQuantity: 0,
         startDate: "1999-01-01",
         expireDate: "3000-01-01",
         address: "默认地址",
@@ -100,7 +103,7 @@ Page({
             title: '领取中...',
         });
         wx.request({
-            url: 'http://localhost:8080/coupon/getCoupon',
+            url: app.globalData.url+'/coupon/getCoupon',
             data: {
                 couponId: _this.data.id,
             },
@@ -113,6 +116,7 @@ Page({
                     wx.showToast({
                         title: '领取成功',
                     });
+                    // _this.onShow();
                 } else if(res.data.code===400){
                     wx.showToast({
                         title: "您已经领取该优惠券，不能重复领取哦！",
@@ -129,11 +133,10 @@ Page({
             }
         });
     },
-
     getCouponDetail(couponID) {
         let _this = this;
         wx.request({
-            url: 'http://localhost:8080/coupon/getCouponInfo', // 后台 API 地址
+            url: app.globalData.url+'/coupon/getCouponInfo', // 后台 API 地址
             data: {
                 id: couponID,
             },
@@ -146,6 +149,7 @@ Page({
                     originalPrice: res.data.data.originalPrice,
                     usedQuantity: res.data.data.usedQuantity,
                     totalQuantity: res.data.data.totalQuantity,
+                    collectedQuantity: res.data.data.collectedQuantity,
                     detailImages: res.data.data.images,
                     address: res.data.data.address,
                     startDate: res.data.data.startDate,

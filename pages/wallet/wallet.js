@@ -1,3 +1,4 @@
+const app = getApp()
 Page({
     data: {
         imageURL: 'https://img.yzcdn.cn/vant/ipad.jpeg',
@@ -22,7 +23,7 @@ Page({
         })
         let _this = this;
         wx.request({
-            url: 'http://localhost:8080/wallet/getAvailableCoupons',
+            url:  app.globalData.url+'/wallet/getAvailableCoupons',
             data: {
                 pageNum: this.data.pageNum + 1,
                 pageSize: this.data.pageSize,
@@ -58,7 +59,7 @@ Page({
         })
         let _this = this;
         wx.request({
-            url: 'http://localhost:8080/wallet/getAvailableCoupons',
+            url:  app.globalData.url+'/wallet/getAvailableCoupons',
             header: {
                 'Authorization': wx.getStorageSync('token')
             },
@@ -99,7 +100,7 @@ Page({
         //TODO 调用后台删除接口，删除数据
         console.log("CouponID:"+id);
         wx.request({
-            url: 'http://localhost:8080/wallet/deleteCoupon',
+            url:  app.globalData.url+'/wallet/deleteCoupon',
             data:{
                 id: id
             },
@@ -123,6 +124,16 @@ Page({
         this.setData({
             cardList
         });
+    },
+    onGetQRCode(event) {
+        //展示优惠券二维码
+        console.log(event);
+        // wx.request({
+        //   url: 'url',
+        //   data: {
+        //     couponId: event.,
+        //   }
+        // })
     }
 
 }, )

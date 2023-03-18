@@ -1,4 +1,5 @@
 // app.js
+const app = getApp();
 App({
     onLaunch() {
         // 展示本地存储能力
@@ -14,7 +15,7 @@ App({
                     title: '登录中...',
                 });
                 wx.request({
-                    url: 'http://localhost:8080/login',
+                    url: this.globalData.url+'/login',
                     data: {
                         code: res.code
                     },
@@ -38,6 +39,6 @@ App({
         })
     },
     globalData: {
-        userInfo: null
+        url: "http://localhost:8080"
     }
 })
