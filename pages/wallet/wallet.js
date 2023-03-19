@@ -6,13 +6,14 @@ Page({
         desc: '商品2的描述',
         pageNum: 1,
         pageSize: 10,
+        walletID: -1,
         hasMore: true, // 是否还有更多数据
         cardList: []
     },
     //用户每次进入该页面，都会调用该函数，可用来刷新
     onShow() {
         //请求后台接口，传入用户的账号信息，返回该用户拥有的有效优惠券
-        this.getInitDrinkData();
+        this.getInitAvailableCouponData();
     },
     getMoreAvailableCouponData() {
         if (!this.data.hasMore) {
@@ -23,7 +24,7 @@ Page({
         })
         let _this = this;
         wx.request({
-            url:  app.globalData.url+'/wallet/getAvailableCoupons',
+            url: app.globalData.url + '/wallet/getAvailableCoupons',
             data: {
                 pageNum: this.data.pageNum + 1,
                 pageSize: this.data.pageSize,
@@ -37,9 +38,11 @@ Page({
                 const data = res.data.data || []
                 const newDataList = _this.data.cardList.concat(data)
                 _this.setData({
+                    //TODO 需要拿到wallet_id
                     ["cardList"]: newDataList,
                     ["hasMore"]: data.length >= _this.data.pageSize,
                     pageNum: _this.data.pageNum + 1,
+                    walletID: getWalletID()
                 })
             },
             fail(err) {
@@ -52,14 +55,14 @@ Page({
             }
         });
     },
-    getInitDrinkData() {
+    getInitAvailableCouponData() {
         //请求后台接口，传入用户的账号信息，返回该用户拥有的有效优惠券
         wx.showLoading({
             title: '加载中...',
         })
         let _this = this;
         wx.request({
-            url:  app.globalData.url+'/wallet/getAvailableCoupons',
+            url: app.globalData.url + '/wallet/getAvailableCoupons',
             header: {
                 'Authorization': wx.getStorageSync('token')
             },
@@ -70,8 +73,10 @@ Page({
             success: (res) => {
                 wx.hideLoading();
                 _this.setData({
+                    //TODO 需要拿到wallet_id
                     ["cardList"]: res.data.data,
                     ["hasMore"]: res.data.data.length >= _this.data.pageSize,
+                    ["walletID"]: _this.getWalletID()
                 })
             },
             fail(err) {
@@ -82,6 +87,19 @@ Page({
                 })
             }
         })
+    },
+    getWalletID() {
+        let wallet_id;
+        wx.request({
+            url: app.globalData.url + "/wallet/getWalletID",
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
+            success: (res) => {
+                wallet_id = res.data.walletID;
+            }
+        })
+        return wallet_id;
     },
     onReachBottom() {
         // 加载下一页数据
@@ -98,10 +116,10 @@ Page({
         } = this.data;
 
         //TODO 调用后台删除接口，删除数据
-        console.log("CouponID:"+id);
+        console.log("CouponID:" + id);
         wx.request({
-            url:  app.globalData.url+'/wallet/deleteCoupon',
-            data:{
+            url: app.globalData.url + '/wallet/deleteCoupon',
+            data: {
                 id: id
             },
             header: {
@@ -128,12 +146,14 @@ Page({
     onGetQRCode(event) {
         //展示优惠券二维码
         console.log(event);
-        // wx.request({
-        //   url: 'url',
-        //   data: {
-        //     couponId: event.,
-        //   }
-        // })
+        // let wallet_id = this.getWalletID();
+        let wallet_id = 1;
+        console.log(wallet_id);
+        wx.navigateTo({
+            url: '/pages/wallet/qrCode/qrCode?coupon_id=' + event.currentTarget.dataset.coupon_id + '&wallet_id=' + wallet_id
+  
+        })
     }
+
 
 }, )

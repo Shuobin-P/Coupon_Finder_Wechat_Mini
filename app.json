@@ -5,7 +5,8 @@
         "pages/detail/detail",
         "pages/wallet/wallet",
         "pages/home/home",
-        "pages/merchant/merchant"
+        "pages/merchant/merchant",
+        "pages/wallet/qrCode/qrCode"
     ],
     "window": {
         "backgroundTextStyle": "light",

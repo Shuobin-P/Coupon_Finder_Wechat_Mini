@@ -10,7 +10,7 @@
             <van-cell-group>
                 <van-card desc="{{item.description}}" num="1" price="{{item.originalPrice - item.presentPrice}}" title="{{item.title}}" thumb="{{ item.pictureUrl }}" >
                     <view slot="footer">
-                        <van-button size="mini" bind:click="onGetQRCode">二维码</van-button>
+                        <van-button size="mini" bind:click="onGetQRCode" data-coupon_id="{{item.id}}" data-wallet_id="{{walletID}}">二维码</van-button>
                     </view>
                 </van-card>
             </van-cell-group>

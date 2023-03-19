@@ -1,18 +1,22 @@
-// pages/merchant/merchant.js
+const app = getApp()
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        qrCodeURL: "",
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        let wallet_id = options.wallet_id;
+        let coupon_id = options.coupon_id;
+        this.setData({
+            qrCodeURL: app.globalData.url + '/coupon/generateQRCode' + '?content=' + app.globalData.url + '/coupon/useCoupon?coupon_id=' + coupon_id + '&wallet_id=' + wallet_id,
+        })
     },
 
     /**
@@ -62,25 +66,5 @@ Page({
      */
     onShareAppMessage() {
 
-    },
-    scanQRcode() {
-        wx.scanCode({
-            success(res) {
-                //可以展示res的内容
-                console.log(res);
-                wx.request({
-                    //商家确认并扣除该优惠券
-                    url: res.result,
-                    header: {
-                        'Authorization': wx.getStorageSync('token')
-                    },
-                })
-                wx.showToast({
-                    title: res.result,
-                    icon: 'success',
-                    duration: 2000
-                })
-            }
-        })
     }
 })
