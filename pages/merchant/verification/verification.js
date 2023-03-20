@@ -1,11 +1,12 @@
-// pages/merchant/merchant.js
+// pages/merchant/verification/verification.js
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        username: '',
+        idCard: ''
     },
 
     /**
@@ -63,29 +64,9 @@ Page({
     onShareAppMessage() {
 
     },
-    scanQRcode() {
-        wx.scanCode({
-            success(res) {
-                //可以展示res的内容
-                console.log(res);
-                wx.request({
-                    //商家确认并扣除该优惠券
-                    url: res.result,
-                    header: {
-                        'Authorization': wx.getStorageSync('token')
-                    },
-                })
-                wx.showToast({
-                    title: res.result,
-                    icon: 'success',
-                    duration: 2000
-                })
-            }
-        })
-    },
-    toVerification() {
-        wx.navigateTo({
-          url: './verification/verification',
-        })
+    onCommit(){
+        let _this = this;
+        console.log(this.data.username);
+        console.log(this.data.password);
     }
 })
