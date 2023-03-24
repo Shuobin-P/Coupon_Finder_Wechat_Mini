@@ -1,18 +1,8 @@
 <!--pages/merchant/verification/verification.wxml-->
 <view>
     <van-cell-group>
-        <van-field model:value="{{ username }}" required clearable label="身份证姓名" icon="question-o" placeholder="请输入姓名" bind:click-icon="onClickIcon" />
-
-        <van-field model:value="{{ idCard }}" type="text" label="身份证号" placeholder="请输入身份证号" required border="{{ false }}" />
+        <van-field model:value="{{ key }}" required clearable label="密钥" placeholder="输入管理员提供的密钥提交即可通过认证"/>
     </van-cell-group>
-    <view class="uploadImg">
-        <van-uploader file-list="{{ fileList }}" bind:after-read="afterRead" />
-        <view>
-            <text>营业执照</text>
-        </view>
-    </view>
 
-
-
-    <van-button type="default" bindtap="onCommit">立即认证</van-button>
+    <van-button type="default" bindtap="onCommit">验证密钥</van-button>
 </view>

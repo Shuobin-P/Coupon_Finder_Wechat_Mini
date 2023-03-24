@@ -1,12 +1,12 @@
 // pages/merchant/verification/verification.js
+const app = getApp()
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        username: '',
-        idCard: ''
+        key: '',
     },
 
     /**
@@ -64,9 +64,40 @@ Page({
     onShareAppMessage() {
 
     },
-    onCommit(){
-        let _this = this;
-        console.log(this.data.username);
-        console.log(this.data.password);
-    }
+    /**
+     * 提交用户输入的信息
+     */
+    onCommit() {
+        console.log(this.data.key);
+        wx.request({
+            //商家确认并扣除该优惠券
+            
+            url: app.globalData.url + "/merchant/verify?key=" + this.data.key,
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
+
+            success: res => {
+                console.log(res.data);
+                if (res.data.code == 0) {
+                    wx.showToast({
+                        title: '密钥错误 请重试',
+                    })
+                } else if (res.data.code == 1) {
+                    wx.setStorageSync('token', `${res.data.data.token}`);
+                    wx.showToast({
+                        title: '已完成商家认证，快去发布优惠券吧！',
+                    })
+                }
+            },
+            fail: res => {
+                wx.showToast({
+                    title: '请求失败，请重试',
+                })
+            }
+
+        })
+    },
+
+
 })
