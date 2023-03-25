@@ -64,7 +64,7 @@ Page({
     onShareAppMessage() {
 
     },
-    scanQRcode() {
+    toScanQRcode() {
         let tmp = common.isMerchant();
         if (tmp == true) {
             wx.scanCode({
@@ -92,8 +92,21 @@ Page({
     },
 
     toVerification() {
+        let temp = common.isMerchant();
+        if (temp == true) {
+            wx.showToast({
+                title: '已完成身份认证',
+            })
+        } else {
+            wx.navigateTo({
+                url: './verification/verification',
+            })
+        }
+    },
+
+    toRelease() {
         wx.navigateTo({
-            url: './verification/verification',
+          url: './release/release',
         })
     }
 })
