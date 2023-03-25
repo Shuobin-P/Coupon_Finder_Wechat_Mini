@@ -69,9 +69,9 @@ Page({
      */
     onCommit() {
         console.log(this.data.key);
+        console.log("缓存中的token: " + wx.getStorageSync('token'));
         wx.request({
             //商家确认并扣除该优惠券
-            
             url: app.globalData.url + "/merchant/verify?key=" + this.data.key,
             header: {
                 'Authorization': wx.getStorageSync('token')
@@ -84,6 +84,9 @@ Page({
                         title: '密钥错误 请重试',
                     })
                 } else if (res.data.code == 1) {
+                    console.log("res.data的值为");
+                    console.log(res.data);
+                    //FIXME 这里有点问题
                     wx.setStorageSync('token', `${res.data.data.token}`);
                     wx.showToast({
                         title: '已完成商家认证，快去发布优惠券吧！',

@@ -1,4 +1,5 @@
 // pages/merchant/merchant.js
+var common = require('../common/common.js');
 Page({
 
     /**
@@ -64,28 +65,35 @@ Page({
 
     },
     scanQRcode() {
-        wx.scanCode({
-            success(res) {
-                //可以展示res的内容
-                console.log(res);
-                wx.request({
-                    //商家确认并扣除该优惠券
-                    url: res.result,
-                    header: {
-                        'Authorization': wx.getStorageSync('token')
-                    },
-                })
-                wx.showToast({
-                    title: res.result,
-                    icon: 'success',
-                    duration: 2000
-                })
-            }
-        })
+        let tmp = common.isMerchant();
+        if (tmp == true) {
+            wx.scanCode({
+                success(res) {
+                    //可以展示res的内容
+                    wx.request({
+                        //商家确认并扣除该优惠券
+                        url: res.result,
+                        header: {
+                            'Authorization': wx.getStorageSync('token')
+                        },
+                    })
+                    wx.showToast({
+                        title: res.result,
+                        icon: 'success',
+                        duration: 2000
+                    })
+                }
+            })
+        } else {
+            wx.showToast({
+                title: '请先完成商家认证之后再进行扫码操作',
+            })
+        }
     },
+
     toVerification() {
         wx.navigateTo({
-          url: './verification/verification',
+            url: './verification/verification',
         })
     }
 })
