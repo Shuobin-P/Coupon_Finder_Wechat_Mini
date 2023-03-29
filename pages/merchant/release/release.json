@@ -1,4 +1,11 @@
 {
-    "usingComponents": {},
+    "usingComponents": {
+        "van-field": "@vant/weapp/field/index",
+        "van-picker": "@vant/weapp/picker/index",
+        "van-uploader": "@vant/weapp/uploader/index",
+        "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+        "van-button": "@vant/weapp/button/index"
+    },
+
     "navigationBarTitleText": "发布优惠券"
 }

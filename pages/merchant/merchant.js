@@ -105,8 +105,14 @@ Page({
     },
 
     toRelease() {
-        wx.navigateTo({
-          url: './release/release',
-        })
+        if (common.isMerchant()) {
+            wx.navigateTo({
+                url: './release/release',
+            })
+        } else {
+            wx.showToast({
+                title: '请先完成商家身份验证',
+            })
+        }
     }
 })

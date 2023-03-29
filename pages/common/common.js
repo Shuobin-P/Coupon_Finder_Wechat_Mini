@@ -1,7 +1,7 @@
-
+import weappJwt from '../../utils/weapp-jwt.js'
 function isMerchant() {
     let token = wx.getStorageSync('token');
-    const payload = JSON.parse(atob(token.split('.')[1]));
+    const payload = weappJwt(token);
     let temp = payload.isMerchant;
     return temp == true;
 }
