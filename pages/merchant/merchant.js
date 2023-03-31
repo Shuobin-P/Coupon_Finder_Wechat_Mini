@@ -64,6 +64,7 @@ Page({
     onShareAppMessage() {
 
     },
+    //FIXME 不知道不使用https协议能否使用这个功能，在局域网里面应该可以不一定要使用https，之前做某个功能的使用，我也以为一定要https来着，但事实上并不需要
     toScanQRcode() {
         let tmp = common.isMerchant();
         if (tmp == true) {

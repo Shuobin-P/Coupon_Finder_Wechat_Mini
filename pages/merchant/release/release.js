@@ -10,12 +10,17 @@ Page({
         title: "",
         description: "",
         quantity: "",
+        originalPrice: "",
+        presentPrice: "",
         columns: ['美食', '饮品', '其它'],
         category: "",
         fileList: [],
         detailList: [],
-        currentDate: new Date().getTime(),
+        productURL: "",
+        productDetailURL: [],
+        startDate: new Date().getTime(),
         minDate: new Date().getTime(),
+        expireDate: new Date().getTime(),
         formatter(type, value) {
             if (type === 'year') {
                 return `${value}年`;
@@ -26,7 +31,7 @@ Page({
             return value;
         },
     },
-
+// minDate 表示用户可选的最小时间
     /**
      * 生命周期函数--监听页面加载
      */
@@ -69,19 +74,6 @@ Page({
 
     },
 
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage() {
-
-    },
 
     onConfirm(event) {
         const {
@@ -99,9 +91,14 @@ Page({
         Toast('取消');
     },
 
-    onInput(event) {
+    onInputStartDate(event) {
         this.setData({
-            currentDate: event.detail,
+            startDate: event.detail,
+        });
+    },
+    onInputExpireDate(event) {
+        this.setData({
+            expireDate: event.detail,
         });
     },
 
@@ -128,9 +125,10 @@ Page({
                     url: res.data
                 });
                 _this.setData({
-                    fileList
+                    fileList,
+                    productURL: JSON.parse(res.data).data
                 });
-                console.log("FileList的值为："+fileList);
+
             },
             fail(res) {
                 console.log("上传失败");
@@ -162,17 +160,44 @@ Page({
                     url: res.data
                 });
                 _this.setData({
-                    detailList: _this.data.detailList.concat(detailList)
+                    detailList: _this.data.detailList.concat(detailList),
                 });
-                console.log("DetailList的值为："+detailList);
+                _this.data.productDetailURL.push(JSON.parse(res.data).data);
             },
             fail(res) {
                 console.log("上传失败");
             }
         });
     },
-    
-    onCommit() {
 
-    }
+    onCommit() {
+        //TODO 提交优惠券对应的信息
+        wx.request({
+            //商家确认并扣除该优惠券
+            url: app.globalData.url+"/merchant/commitNewCouponInfo",
+            method: "POST",
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
+            data: {
+                title: this.data.title,
+                description: this.data.description,
+                quantity: this.data.quantity,
+                originalPrice: this.data.originalPrice,
+                presentPrice: this.data.presentPrice,
+                category: this.data.category,
+                productURL: this.data.productURL,
+                productDetailURL: this.data.productDetailURL,
+                startDate: this.data.startDate,
+                expireDate: this.data.expireDate
+            },
+            success(res) {
+               wx.showToast({
+                 title: '成功发布新优惠券',
+               })
+            }
+    })
+},
+
+
 })
