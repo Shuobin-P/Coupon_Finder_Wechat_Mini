@@ -1,5 +1,4 @@
 <!--index.wxml-->
-<view class="to_fill_content">待填充内容</view>
 <van-tabs active="{{ activeTab }}" bind:change="onChange" animated custom-class="my-tabs">
     <van-tab title="美食">
         <van-card wx:for="{{cardList}}" num="0" origin-price="{{item.originPrice}}" price="{{item.price}}" desc="描述信息" title="{{item.title}}" thumb="{{ imageURL }}">

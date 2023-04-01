@@ -73,6 +73,8 @@ Page({
                     //可以展示res的内容
                     wx.request({
                         //商家确认并扣除该优惠券
+                        //FIXME 少了一个消费者wallet_id参数，应该是
+                        //生成二维码的那个地方出现了问题
                         url: res.result,
                         header: {
                             'Authorization': wx.getStorageSync('token')
@@ -83,6 +85,8 @@ Page({
                         icon: 'success',
                         duration: 2000
                     })
+                    console.log(res.result);
+                    console.log(res);
                 }
             })
         } else {
