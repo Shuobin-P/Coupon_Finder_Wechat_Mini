@@ -9,9 +9,11 @@ Page({
         pageNum: 1,
         pageSize: 10,
         hasMore: true, // 是否还有更多数据
-        cardList: []
+        cardList: [],
+        qiniuImgPrefix: "",
     },
     onChange(event) {
+        this.data.qiniuImgPrefix = app.globalData.qiniuImgPrefix;
         this.data.activeTab = event.detail.index;
         //如果this.activeTab = 0 则 cardList = 请求对应后台接口的数据
         if (this.data.activeTab === 0) {

@@ -19,7 +19,6 @@
         <van-uploader file-list="{{ fileList }}" max-count="1" bind:after-read="afterRead" deletable="true" preview-image="true"/>
     </view>
 
-    <!-- FIXME 这里不能上传三张图片 -->
     <view>
         <text>请上传商品的详细介绍:</text>
         <van-uploader file-list="{{ detailList }}" max-count="3" bind:after-read="detailAfterRead" deletable="true" preview-image="true"/>

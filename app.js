@@ -39,6 +39,7 @@ App({
         })
     },
     globalData: {
-        url: "http://172.20.10.3:8080"
+        url: "http://localhost:8080",
+        qiniuImgPrefix: "http://rsa5pzqlo.hn-bkt.clouddn.com/"
     }
 })
