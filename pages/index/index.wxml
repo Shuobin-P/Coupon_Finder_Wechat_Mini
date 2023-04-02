@@ -1,8 +1,12 @@
 <!--index.wxml-->
 <van-tabs active="{{ activeTab }}" bind:change="onChange" animated custom-class="my-tabs">
     <van-tab title="美食">
-        <van-card wx:for="{{cardList}}" num="0" origin-price="{{item.originPrice}}" price="{{item.price}}" desc="描述信息" title="{{item.title}}" thumb="{{ imageURL }}">
+        <van-card wx:if="{{ foodCardList.length > 0 }}" wx:for="{{foodCardList}}" num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" desc="{{item.description}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+            <view slot="footer">
+                <van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toDetail">查看详情</van-button>
+            </view>
         </van-card>
+        <van-empty wx:if="{{ cardList.length <= 0 }}" description="暂无数据" />
     </van-tab>
 
     <van-tab title="饮品">
@@ -13,7 +17,15 @@
         </van-card>
         <van-empty wx:if="{{ cardList.length <= 0 }}" description="暂无数据" />
     </van-tab>
-    <van-tab title="其它">内容 3</van-tab>
+
+    <van-tab title="其它">
+        <van-card wx:if="{{ otherCardList.length > 0 }}" wx:for="{{otherCardList}}" num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" desc="{{item.description}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+            <view slot="footer">
+                <van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toDetail">查看详情</van-button>
+            </view>
+        </van-card>
+        <van-empty wx:if="{{ otherCardList.length <= 0 }}" description="暂无数据" />
+    </van-tab>
 </van-tabs>
 
 <van-tabbar active="{{ active }}" bind:change="onChange">

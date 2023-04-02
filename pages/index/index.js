@@ -8,24 +8,25 @@ Page({
         imageURL: "https://img95.699pic.com/photo/50075/6447.jpg_wh300.jpg",
         pageNum: 1,
         pageSize: 10,
+        foodPageNum: 1,
         hasMore: true, // 是否还有更多数据
+        foodHasMore: true,
+        otherHasMore: true,
         cardList: [],
-        qiniuImgPrefix: "",
+        foodCardList: [],
+        otherCardList: [],
     },
     onChange(event) {
-        this.data.qiniuImgPrefix = app.globalData.qiniuImgPrefix;
         this.data.activeTab = event.detail.index;
         //如果this.activeTab = 0 则 cardList = 请求对应后台接口的数据
         if (this.data.activeTab === 0) {
             this.setData({
                 cardList: [{
-                    title: "美食测试",
-                    originPrice: 100,
-                    price: 20,
+                    foodCardList: [],
+                    foodPageNUm: 1
                 }],
-                activeTab: 0
             })
-
+            this.getInitFoodData();
         }
         //下面这里好像activeTab赋值好像有问题。
         else if (this.data.activeTab === 1) {
@@ -34,9 +35,14 @@ Page({
                 cardList: [],
                 pageNum: 1
             })
-
             this.getInitDrinkData();
-            
+        }
+        else if(this.data.activeTab === 2) {
+            this.setData({
+                otherCardList: [],
+                otherPageNum: 1
+            })
+            this.getInitOtherData();
         }
     },
     // 事件处理函数
@@ -85,6 +91,104 @@ Page({
             }
         })
     },
+    getInitFoodData() {
+        wx.showLoading({
+            title: '加载中...',
+        })
+        let _this = this;
+        wx.request({
+            url: app.globalData.url+'/coupon/getHotFoodCoupons', // 后台 API 地址
+            data: {
+                foodPageNum: 1,
+                pageSize: this.data.pageSize,
+            },
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
+            success(res) {
+                wx.hideLoading();
+                _this.setData({
+                    ["foodCardList"]: res.data.data,
+                    ["foodHasMore"]: res.data.data.length >= _this.data.pageSize,
+                })
+            },
+            fail(err) {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '加载失败，请重试',
+                    icon: 'none',
+                })
+            }
+        })
+    },
+    getInitOtherData() {
+        wx.showLoading({
+            title: '加载中...',
+        })
+        let _this = this;
+        wx.request({
+            url: app.globalData.url+'/coupon/getHotOtherCoupons', // 后台 API 地址
+            data: {
+                otherPageNum: 1,
+                pageSize: this.data.pageSize,
+            },
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
+            success(res) {
+                wx.hideLoading();
+                _this.setData({
+                    ["otherCardList"]: res.data.data,
+                    ["otherHasMore"]: res.data.data.length >= _this.data.pageSize,
+                })
+            },
+            fail(err) {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '加载失败，请重试',
+                    icon: 'none',
+                })
+            }
+        })
+    },
+    getMoreFoodData() {
+        if (!this.data.foodHasMore) {
+            return
+        }
+        wx.showLoading({
+            title: '加载中...',
+        })
+
+        let _this = this;
+        wx.request({
+            url: app.globalData.url+'/coupon/getHotFoodCoupons', // 后台 API 地址
+            data: {
+                pageNum: this.data.foodPageNum + 1,
+                pageSize: this.data.pageSize,
+            },
+            header: {
+                'content-type': 'application/json',
+                'Authorization': wx.getStorageSync('token')
+            },
+            success(res) {
+                wx.hideLoading();
+                const data = res.data.data || []
+                const newDataList = _this.data.foodCardList.concat(data)
+                _this.setData({
+                    ["foodCardList"]: newDataList,
+                    ["foodHasMore"]: data.length >= _this.data.pageSize,
+                    foodPageNum: _this.data.foodPageNum + 1,
+                })
+            },
+            fail(err) {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '加载失败，请重试',
+                    icon: 'none',
+                })
+            }
+        });
+    },
     getMoreDrinkData() {
         if (!this.data.hasMore) {
             return
@@ -123,10 +227,18 @@ Page({
             }
         });
     },
+
     // 上滑触底事件
     onReachBottom() {
         // 加载下一页数据
-        this.getMoreDrinkData();
+        if(this.activeTab == 0) {
+            this.getMoreFoodData();
+        } else if(this.activeTab == 1) {
+            this.getMoreDrinkData();
+        } else if(this.activeTab == 2) {
+            this.getMoreOtherData();
+        }
+        
     },
     toDetail(event) {
 		wx.navigateTo({

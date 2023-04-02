@@ -32,11 +32,11 @@
                 </view>
             </view>
             <view>
-                <text>有效期：2022-10-11至2023-01-01</text>
+                <text>有效期：{{startDate}}至{{expireDate}}</text>
             </view>
-            <view>
+            <!-- <view>
                 <text>店铺地址：xxxxxxxxxxxxx</text>
-            </view>
+            </view> -->
         </view>
         <view class="goodsDetailPicturesTitle">
             <text>商品详情</text>

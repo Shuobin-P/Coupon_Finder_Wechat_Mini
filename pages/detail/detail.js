@@ -1,5 +1,6 @@
 // pages/detail/detail.js
 const app = getApp()
+var common = require('../common/common.js');
 
 Page({
 
@@ -152,8 +153,8 @@ Page({
                     collectedQuantity: res.data.data.collectedQuantity,
                     detailImages: res.data.data.images,
                     address: res.data.data.address,
-                    startDate: res.data.data.startDate,
-                    expireDate: res.data.data.expireDate
+                    startDate: common.js_date_time(res.data.data.startDate),
+                    expireDate: common.js_date_time(res.data.data.expireDate)
                 })
             },
             fail(err) {

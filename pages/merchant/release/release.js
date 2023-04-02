@@ -172,6 +172,12 @@ Page({
 
     onCommit() {
         //TODO 提交优惠券对应的信息
+        if(this.data.category.length == 0) {
+            wx.showToast({
+              title: '请选择优惠券类别',
+            })
+            return;
+        }
         wx.request({
             //商家确认并扣除该优惠券
             url: app.globalData.url+"/merchant/commitNewCouponInfo",
