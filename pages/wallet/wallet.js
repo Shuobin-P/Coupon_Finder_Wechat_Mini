@@ -89,17 +89,20 @@ Page({
         })
     },
     getWalletID() {
-        let wallet_id;
+        let _this = this;
         wx.request({
             url: app.globalData.url + "/wallet/getWalletID",
             header: {
                 'Authorization': wx.getStorageSync('token')
             },
             success: (res) => {
-                wallet_id = res.data.walletID;
+                _this.setData({
+                    walletID : res.data.data
+                })
             }
         })
-        return wallet_id;
+        console.log("返回的的_this.walletID为："+ _this.data.walletID);
+        return  _this.data.walletID;
     },
     onReachBottom() {
         // 加载下一页数据
@@ -146,12 +149,11 @@ Page({
     onGetQRCode(event) {
         //展示优惠券二维码
         console.log(event);
-        // let wallet_id = this.getWalletID();
-        let wallet_id = 1;
+        let wallet_id = this.getWalletID();
+        //let wallet_id = 1;
         console.log(wallet_id);
         wx.navigateTo({
             url: '/pages/wallet/qrCode/qrCode?coupon_id=' + event.currentTarget.dataset.coupon_id + '&wallet_id=' + wallet_id
-  
         })
     }
 

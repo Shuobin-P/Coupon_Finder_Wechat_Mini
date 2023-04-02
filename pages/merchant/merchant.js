@@ -79,14 +79,25 @@ Page({
                         header: {
                             'Authorization': wx.getStorageSync('token')
                         },
+                        success: (res) => {
+                            console.log(res.data.data);
+                            console.log(res.data);
+                            if (res.data.code == 1) {
+                                wx.showToast({
+                                    title: "成功使用优惠券",
+                                    icon: 'success',
+                                    duration: 2000
+                                })
+                            }else {
+                                wx.showToast({
+                                    title: "使用失败",
+                                    icon: 'fail',
+                                    duration: 2000
+                                })
+                            }
+                        }
                     })
-                    wx.showToast({
-                        title: res.result,
-                        icon: 'success',
-                        duration: 2000
-                    })
-                    console.log(res.result);
-                    console.log(res);
+
                 }
             })
         } else {
