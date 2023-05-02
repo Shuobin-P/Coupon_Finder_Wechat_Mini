@@ -39,7 +39,7 @@ App({
         })
     },
     globalData: {
-        url: "http://localhost:8080",
-        qiniuImgPrefix: "http://rsa5pzqlo.hn-bkt.clouddn.com/"
+        url: "https://localhost:443",
+        qiniuImgPrefix: "http://rtxlr46aj.hn-bkt.clouddn.com/"
     }
 })

@@ -191,6 +191,10 @@ Page({
     },
     getMoreDrinkData() {
         if (!this.data.hasMore) {
+            wx.showToast({
+                title: '我是有底线的',
+                icon: 'none',
+            })
             return
         }
         wx.showLoading({
@@ -230,12 +234,14 @@ Page({
 
     // 上滑触底事件
     onReachBottom() {
+        console.log("到底了,activeTab的值为: "+this.data.activeTab)
+        
         // 加载下一页数据
-        if(this.activeTab == 0) {
+        if(this.data.activeTab == 0) {
             this.getMoreFoodData();
-        } else if(this.activeTab == 1) {
+        } else if(this.data.activeTab == 1) {
             this.getMoreDrinkData();
-        } else if(this.activeTab == 2) {
+        } else if(this.data.activeTab == 2) {
             this.getMoreOtherData();
         }
         
@@ -249,5 +255,12 @@ Page({
         wx.navigateTo({
             url: `/pages/home/home`
         })
-    }
+    },
+
+    //搜索框
+    handleClickInput() {
+        wx.navigateTo({
+            url: `/pages/index/search/search`
+        })
+    },
 })

@@ -8,7 +8,8 @@
         "pages/merchant/merchant",
         "pages/wallet/qrCode/qrCode",
         "pages/merchant/verification/verification",
-        "pages/merchant/release/release"
+        "pages/merchant/release/release",
+        "pages/index/search/search"
     ],
     "window": {
         "backgroundTextStyle": "light",

@@ -1,2 +1,4 @@
 <!--pages/wallet/qrCode/qrCode.wxml-->
-<image src="{{ qrCodeURL }}" mode="aspectFit" />
+<view class="imgcontainer">
+<image src="{{ qrCodeURL }}" class='in-image' mode="aspectFit" />
+</view>

@@ -17,7 +17,6 @@ Page({
         console.log("钱包ID为：" + wallet_id);
         console.log("优惠券ID为：" + coupon_id);
         this.setData({
-            //FIXME wallet_id好像传错了.
             qrCodeURL: app.globalData.url + '/coupon/generateQRCode' + '?content=' + encodeURIComponent(app.globalData.url + '/coupon/useCoupon?wallet_id=' + wallet_id +'&coupon_id=' + coupon_id),
         })
     },
