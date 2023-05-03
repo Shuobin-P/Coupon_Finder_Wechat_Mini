@@ -1,8 +1,8 @@
 const app = getApp()
 Page({
     data: {
-      hotList: ['优惠券1', '优惠券2', '优惠券3', '优惠券4', '优惠券5'],
-      historyList: ['优惠券7', '优惠券6', '优惠券3'],
+      hotList: [],
+      historyList: [],
       cardList: [],
       pageNum: 1,
       pageSize: 10,
@@ -11,17 +11,23 @@ Page({
       isShowHot: true,
       isShowSearchResult: true,
       queryInfo: "",
+      top_n: 10
+    },
+    onLoad() {
+        this.setData({
+          historyList: this.getHistoryList(),
+        })
+        this.getHotList()
     },
     onSearchInput(event){
         this.setData({
             isShowHistory: true,
             isShowHot: true,
             isShowSearchResult: false,
-            queryInfo: event.detail.queryInfo
         })
     },
     /**
-     * 同步用户输入的值
+     * 同步用户在输入框输入的值
      */
     onChange(e) {
         this.setData({
@@ -29,12 +35,15 @@ Page({
         });
     },
     onSearch(){
-        //可做一个分页的处理
+        let keyword = this.data.queryInfo
+        this.addHistory(keyword)
         this.setData({
             isShowHistory: false,
             isShowHot: false,
             isShowSearchResult: true
         })
+        this.updateKeywordsAppearingTimes()
+        this.getHotList()
         this.getInitData()
     },
     showHistory() {
@@ -49,14 +58,71 @@ Page({
             })
           }
     },
+    addHistory(keyword) {
+        let historyList = this.getHistoryList()
+        // 如果历史记录中已经存在该关键词，先将其删除，避免出现重复记录
+        let index = historyList.indexOf(keyword)
+        if (index !== -1) {
+          historyList.splice(index, 1)
+        }
+        // 将新的关键词添加到历史记录数组中
+        historyList.unshift(keyword)
+        // 只保留最近的10条记录
+        if (historyList.length > 10) {
+          historyList = historyList.slice(0, 10)
+        }
+        this.setHistoryList(historyList)
+    },
+    getHistoryList() {
+        let historyList = wx.getStorageSync('historyList')
+        if (!historyList) {
+          historyList = []
+        } else {
+          historyList = JSON.parse(historyList)
+        }
+        return historyList
+    },
+    // 更新本地存储中的搜索历史记录
+    setHistoryList(historyList) {
+        wx.setStorageSync('historyList', JSON.stringify(historyList))
+        this.setData({
+            historyList: this.getHistoryList()
+        })
+    },  
+    clearHistory() {
+        this.setData({
+            historyList: []
+        })
+        wx.setStorageSync('historyList', null)
+    },
+    getHotList() {
+        let _this = this
+        wx.request({
+          url: app.globalData.url+ '/search/getTopNHotSearchKeywords',
+          data: {
+            top_n: this.data.top_n
+         },
+          header: {
+            'Authorization': wx.getStorageSync('token')
+         },
+          success(res) {
+              _this.setData({
+                  hotList:res.data.data  
+              })
+         },
+          fail(err) {
+                wx.showToast({
+                 title: '加载热门搜索失败，请重试',
+                 icon: 'none',
+            })
+         }
+        })
+    },
     getInitData() {
         wx.showLoading({
             title: '加载中...',
         })
         let _this = this;
-        console.log("用户输入的值为："+ this.data.value)
-        console.log("PageSize的值为："+ this.data.pageSize)
-
         wx.request({
             url: app.globalData.url+'/coupon/findCoupon', // 后台 API 地址
             data: {
@@ -128,5 +194,25 @@ Page({
     onReachBottom() {
         this.getMoreData();
     },
+    updateKeywordsAppearingTimes() {
+        wx.request({
+            url: app.globalData.url+'/search/updateKeywordsAppearingTimes', 
+            data: {
+                keywords: this.data.queryInfo,
+            },
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
+            success(res) {
+            },
+            fail(err) {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '请求更新搜索关键词异常，请重试',
+                    icon: 'none',
+                })
+            }
+        })
+    }
   })
   

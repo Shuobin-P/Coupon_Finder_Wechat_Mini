@@ -1,8 +1,4 @@
 <view class="search-container">
-  <!-- <view class="search-bar">
-    <input class="search-input" placeholder="请输入关键词" bindinput="onSearchInput" bindfocus="showHistory"/>
-    <button class="search-btn" bindtap="onSearch">搜索</button>
-  </view> -->
   <view>
     <van-search value="{{ value }}" placeholder="请输入搜索关键词" bind:click-input="onSearchInput" bind:search="onSearch" bind:change="onChange" use-action-slot>
         <view slot="action" bind:tap="onSearch">搜索</view>
@@ -10,20 +6,26 @@
   </view>
 
   <view class="search-history" wx:if="{{isShowHistory}}">
+  <view class="father">
     <view class="history-title">历史搜索</view>
+    <view class="btn-container">
+    <button class="clear-btn" bindtap="clearHistory">清空搜索历史</button>
+    </view>
+  </view>
+
     <view class="history-list">
       <block wx:for="{{historyList}}">
         <view class="history-item">{{item}}</view>
       </block>
     </view>
-    <button class="clear-btn" bindtap="clearHistory">清空搜索历史</button>
+    
   </view>
   
   <view class="hot-search" wx:if="{{isShowHot}}">
     <view class="hot-title">热门搜索</view>
     <view class="hot-list">
       <block wx:for="{{hotList}}">
-        <view class="hot-item">{{item}}</view>
+        <view class="hot-item">{{item.value}}</view>
       </block>
     </view>
   </view>
