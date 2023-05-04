@@ -118,6 +118,14 @@ Page({
          }
         })
     },
+    tapToSearch(event) {
+        let value = event.currentTarget.dataset.value;
+        let _this = this
+        _this.setData({
+            queryInfo: value
+        })
+        _this.onSearch()
+    },
     getInitData() {
         wx.showLoading({
             title: '加载中...',
@@ -213,6 +221,11 @@ Page({
                 })
             }
         })
-    }
+    },
+    toCouponDetail(event) {
+		wx.navigateTo({
+			url: `/pages/detail/detail?id=${event.target.dataset.id}`
+		});
+    },
   })
   

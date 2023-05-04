@@ -15,7 +15,7 @@
 
     <view class="history-list">
       <block wx:for="{{historyList}}">
-        <view class="history-item">{{item}}</view>
+        <view class="history-item" bindtap="tapToSearch" data-value="{{item}}">{{item}}</view>
       </block>
     </view>
     
@@ -25,7 +25,7 @@
     <view class="hot-title">热门搜索</view>
     <view class="hot-list">
       <block wx:for="{{hotList}}">
-        <view class="hot-item">{{item.value}}</view>
+        <view class="hot-item" bindtap="tapToSearch" data-value="{{item.value}}">{{item.value}}</view>
       </block>
     </view>
   </view>
@@ -33,7 +33,7 @@
   <view class="result-list" wx:if="{{isShowSearchResult}}">
         <van-card wx:if="{{ cardList.length > 0 }}" wx:for="{{cardList}}" num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" desc="{{item.description}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
             <view slot="footer">
-                <van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toDetail">查看详情</van-button>
+                <van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toCouponDetail">查看详情</van-button>
             </view>
         </van-card>
         <van-empty wx:if="{{ cardList.length <= 0 }}" description="暂无数据" />
