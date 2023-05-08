@@ -1,8 +1,4 @@
 <!--pages/wallet/wallet.wxml-->
-<!-- 可以使用滑动vant weapp中的 
-    Cell 单元格 
-    SwipeCell Card 
-    商品卡片 -->
 <van-tabs active="{{ activeTab }}" bind:change="onChange">
     <van-tab title="可使用优惠券">
         <van-swipe-cell 
