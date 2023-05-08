@@ -2,3 +2,9 @@
 .to_fill_content {
     height: 150rpx;
 }
+.card-desc {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }

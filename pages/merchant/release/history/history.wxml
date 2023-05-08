@@ -1,0 +1,42 @@
+<!--pages/merchant/release/history/history.wxml-->
+<van-tabs active="{{ activeTab }}" animated>
+    <van-tab title="未生效">
+        <van-swipe-cell 
+        right-width="{{ 65 }}" 
+        left-width="{{ 0 }}" 
+        wx:for="{{upcomingCouponList}}">
+            <view slot="left">选择</view>
+            <van-cell-group>
+                <van-card wx:if="{{ upcomingCouponList.length > 0 }}" wx:for="{{upcomingCouponList}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+                    <view slot="desc" class="card-desc">{{item.description}}</view>
+                    <view slot="footer">
+                        <text>开始生效日期：{{ item.startDate }}</text>
+                    </view>
+                </van-card>
+            </van-cell-group>
+
+            <view slot="right" class="right">
+                <van-button type="danger" bind:click="onDeleteUpcomingCoupon" 
+                data-id="{{item.id}}" 
+                data-index = "{{index}}">
+                    取消发布
+                </van-button>
+            </view>
+        </van-swipe-cell>
+        <van-empty wx:if="{{ upcomingCouponList.length <= 0 }}" description="暂无数据" />
+    </van-tab>
+
+    <van-tab title="生效中">
+        <van-card wx:if="{{ validCouponList.length > 0 }}" wx:for="{{validCouponList}}" num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+            <view slot="desc" class="card-desc">{{item.description}}</view>
+        </van-card>
+        <van-empty wx:if="{{ validCouponList.length <= 0 }}" description="暂无数据" />
+    </van-tab>
+
+    <van-tab title="已过期">
+        <van-card wx:if="{{ expiredCouponList.length > 0 }}" wx:for="{{expiredCouponList}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+            <view slot="desc" class="card-desc">{{item.description}}</view>
+        </van-card>
+        <van-empty wx:if="{{ expiredCouponList.length <= 0 }}" description="暂无数据" />
+    </van-tab>
+</van-tabs>

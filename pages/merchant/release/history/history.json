@@ -1,10 +1,10 @@
 {
-    "navigationBarTitleText": "卡包",
+    "navigationBarTitleText": "发布记录",
     "usingComponents": {
         "van-tab": "@vant/weapp/tab/index",
         "van-tabs": "@vant/weapp/tabs/index",
         "van-swipe-cell": "@vant/weapp/swipe-cell/index",
-        "van-card": "@vant/weapp/card/index",
-        "van-empty": "@vant/weapp/empty/index"
+        "van-empty": "@vant/weapp/empty/index",
+        "van-card": "@vant/weapp/card/index"
       }
 }

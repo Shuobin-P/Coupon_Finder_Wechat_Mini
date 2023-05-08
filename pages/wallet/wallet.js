@@ -1,19 +1,27 @@
 const app = getApp()
 Page({
     data: {
-        imageURL: 'https://img.yzcdn.cn/vant/ipad.jpeg',
-        title: '商品2',
-        desc: '商品2的描述',
+        imageURL: '',
+        title: '',
+        desc: '',
         pageNum: 1,
+        historyPageNum: 1,
         pageSize: 10,
         walletID: -1,
         hasMore: true, // 是否还有更多数据
-        cardList: []
+        hasMoreUsedHistory: true,
+        cardList: [],
+        usedCouponList: [],
+        activeTab: 0,
     },
     //用户每次进入该页面，都会调用该函数，可用来刷新
     onShow() {
         //请求后台接口，传入用户的账号信息，返回该用户拥有的有效优惠券
-        this.getInitAvailableCouponData();
+        this.getInitAvailableCouponData()
+        this.getInitUsedCouponHistory()
+    },
+    onChange(event) {
+        this.data.activeTab = event.detail.index;
     },
     getMoreAvailableCouponData() {
         if (!this.data.hasMore) {
@@ -88,6 +96,38 @@ Page({
             }
         })
     },
+    getInitUsedCouponHistory() {
+        wx.showLoading({
+            title: '加载中...',
+        })
+        let _this = this;
+        wx.request({
+            url: app.globalData.url + '/wallet/getCouponUsedHistory',
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
+            data: {
+                historyPageNum: 1,
+                pageSize: this.data.pageSize,
+            },
+            success: (res) => {
+                wx.hideLoading();
+                _this.setData({
+                    //TODO 需要拿到wallet_id
+                    ["usedCouponList"]: res.data.data,
+                    ["hasMoreUsedHistory"]: res.data.data.length >= _this.data.pageSize,
+                    ["walletID"]: _this.getWalletID()
+                })
+            },
+            fail(err) {
+                wx.hideLoading();
+                wx.showToast({
+                    title: '加载失败，请重试',
+                    icon: 'none',
+                })
+            }
+        })
+    },
     getWalletID() {
         let _this = this;
         wx.request({
@@ -97,16 +137,19 @@ Page({
             },
             success: (res) => {
                 _this.setData({
-                    walletID : res.data.data
+                    walletID: res.data.data
                 })
             }
         })
-        console.log("返回的的_this.walletID为："+ _this.data.walletID);
-        return  _this.data.walletID;
+        return _this.data.walletID;
     },
     onReachBottom() {
         // 加载下一页数据
-        this.getMoreAvailableCouponData();
+        if (this.data.activeTab === 0) {
+            this.getMoreAvailableCouponData();
+        } else if (this.data.activeTab === 1) {
+            this.getMoreAvailableUsedCouponHistory();
+        }
     },
     onDelete(event) {
         //点击事件
@@ -155,7 +198,6 @@ Page({
         wx.navigateTo({
             url: '/pages/wallet/qrCode/qrCode?coupon_id=' + event.currentTarget.dataset.coupon_id + '&wallet_id=' + wallet_id
         })
-    }
-
-
-}, )
+    },
+}
+)

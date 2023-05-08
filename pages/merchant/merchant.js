@@ -130,5 +130,16 @@ Page({
                 title: '请先完成商家身份验证',
             })
         }
+    },
+    toReleaseHistory() {
+        if (common.isMerchant()) {
+            wx.navigateTo({
+                url: './release/history/history',
+            })
+        } else {
+            wx.showToast({
+                title: '请先完成商家身份验证',
+            })
+        }
     }
 })
