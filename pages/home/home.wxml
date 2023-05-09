@@ -6,7 +6,7 @@
 
 
     <view class='merchant'>
-        <text bindtap="toMerchat">商家入驻</text>
+        <text bindtap="toMerchat">商家服务</text>
     </view>
 
 </view>

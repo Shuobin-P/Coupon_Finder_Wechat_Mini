@@ -15,3 +15,14 @@
     align-items: center;
     justify-content: center;
   }
+
+  .card-tag {
+    position: relative; /* 设置为相对定位 */
+    top: -90px; 
+    width: 60px;
+    background-color: rgb(236, 41, 41); /* 背景色为红色 */
+    color: white; /* 文字颜色为白色 */
+    padding: 2px 6px; /* 内边距为2px 6px */
+    border-radius: 4px; /* 边框圆角为4px */
+    font-size: 12px; /* 字号为12px */
+  }

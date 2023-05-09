@@ -172,6 +172,40 @@ Page({
         this.setData({
             upcomingCouponList
         });
+    },
+    onStopValidCoupon(e) {
+        const {
+            index,
+            id
+        } = e.currentTarget.dataset;
+        const {
+            validCouponList
+        } = this.data;
+        wx.request({
+            url: app.globalData.url + '/merchant/stopValidCoupon',
+            data: {
+                couponId: id
+            },
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
+            success(res) {
+                wx.showToast({
+                    title: '成功停止发布该优惠券！',
+                    icon: 'success',
+                })
+            },
+            fail(res) {
+                wx.showToast({
+                    title: '删除失败，请重试',
+                    icon: 'none',
+                })
+            }
+        })
+        validCouponList.splice(index, 1);
+        this.setData({
+            validCouponList
+        });
     }
 
 })

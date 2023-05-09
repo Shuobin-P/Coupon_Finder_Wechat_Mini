@@ -32,14 +32,14 @@ App({
                         wx.setStorageSync('token', `${res.data.data.tokenHead} ${res.data.data.token}`);
                     },
                     fail: res => {
-                        console.log('后台登录接口请求失败: -->', err);
+                        console.log('后台登录接口请求失败: -->', res);
                     }
                 })
             },
         })
     },
     globalData: {
-        url: "https://localhost:443",
+        url: "http://localhost:8080",
         qiniuImgPrefix: "http://rtxlr46aj.hn-bkt.clouddn.com/"
     }
 })
