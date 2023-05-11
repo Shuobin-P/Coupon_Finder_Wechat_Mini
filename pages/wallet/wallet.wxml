@@ -14,7 +14,8 @@
                 title="{{item.title}}" 
                 thumb="{{ item.pictureUrl }}" >
                     <view slot="footer">
-                        <van-button size="mini" bind:click="onGetQRCode" data-coupon_id="{{item.id}}" data-wallet_id="{{walletID}}">二维码</van-button>
+                        <van-button size="mini" type="primary" bind:click="onGetQRCode" data-coupon_id="{{item.id}}" data-wallet_id="{{walletID}}">二维码</van-button>
+                        <view class="expiry-date">有效期至：{{item.expireDate}}</view>
                     </view>
                 </van-card>
             </van-cell-group>

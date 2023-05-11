@@ -63,6 +63,7 @@ Page({
         // 如果历史记录中已经存在该关键词，先将其删除，避免出现重复记录
         let index = historyList.indexOf(keyword)
         if (index !== -1) {
+          //移除已经存在的关键字
           historyList.splice(index, 1)
         }
         // 将新的关键词添加到历史记录数组中
