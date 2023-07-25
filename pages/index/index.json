@@ -1,5 +1,15 @@
 {
+    "navigationBarTitleText": "Coupon Finder",
+
     "usingComponents": {
-        "van-button": "@vant/weapp/button/index"
-      }
+        "van-tab": "@vant/weapp/tab/index",
+        "van-tabs": "@vant/weapp/tabs/index",
+        "van-card": "@vant/weapp/card/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-empty": "@vant/weapp/empty/index",
+        "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+        "van-tabbar": "@vant/weapp/tabbar/index",
+        "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+        "van-search": "@vant/weapp/search/index"
+    }
 }

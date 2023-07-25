@@ -1,26 +1,10 @@
 /**index.wxss**/
-.container{
-    margin-top: 0px;
-    padding-top: 100rpx;
+.to_fill_content {
+    height: 150rpx;
 }
-.icon-father{
-    display: flex;
-    align-items: center;
-}
-.icon-box{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.icon-box-title{
-font-size: 28rpx;
-color: #666666;
-text-align: center;
-}
-
-#icon-box-meishi{
-    margin-right: 200rpx;
-}
-#icon-box-yinliao{
-    margin-right: 200rpx;
-}
+.card-desc {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }

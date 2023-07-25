@@ -1,0 +1,8 @@
+<!--pages/merchant/verification/verification.wxml-->
+<view>
+    <van-cell-group>
+        <van-field model:value="{{ key }}" required clearable label="密钥" placeholder="输入管理员提供的密钥提交即可通过认证"/>
+    </van-cell-group>
+
+    <van-button type="default" bindtap="onCommit">验证密钥</van-button>
+</view>

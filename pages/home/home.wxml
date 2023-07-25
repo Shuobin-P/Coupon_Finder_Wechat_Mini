@@ -1,0 +1,12 @@
+<!--pages/jiaocheng/jiaocheng.wxml-->
+<view class='container'>
+    <view class='my_coupon'>
+        <text bindtap="toWallet">我的优惠券</text>
+    </view>
+
+
+    <view class='merchant'>
+        <text bindtap="toMerchat">商家服务</text>
+    </view>
+
+</view>

@@ -1,0 +1,43 @@
+<view class="search-container">
+  <view>
+    <van-search value="{{ value }}" placeholder="请输入搜索关键词" bind:click-input="onSearchInput" bind:search="onSearch" bind:change="onChange" use-action-slot>
+        <view slot="action" bind:tap="onSearch">搜索</view>
+    </van-search>
+  </view>
+
+  <view class="search-history" wx:if="{{isShowHistory}}">
+  <view class="father">
+    <view class="history-title">历史搜索</view>
+    <view class="btn-container">
+    <button class="clear-btn" bindtap="clearHistory">清空搜索历史</button>
+    </view>
+  </view>
+
+    <view class="history-list">
+      <block wx:for="{{historyList}}">
+        <view class="history-item" bindtap="tapToSearch" data-value="{{item}}">{{item}}</view>
+      </block>
+    </view>
+    
+  </view>
+  
+  <view class="hot-search" wx:if="{{isShowHot}}">
+    <view class="hot-title">热门搜索</view>
+    <view class="hot-list">
+      <block wx:for="{{hotList}}">
+        <view class="hot-item" bindtap="tapToSearch" data-value="{{item.value}}">{{item.value}}</view>
+      </block>
+    </view>
+  </view>
+
+  <view class="result-list" wx:if="{{isShowSearchResult}}">
+        <van-card wx:if="{{ cardList.length > 0 }}" wx:for="{{cardList}}" num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" desc="{{item.description}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+            <view slot="footer">
+                <van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toCouponDetail">查看详情</van-button>
+            </view>
+        </van-card>
+        <van-empty wx:if="{{ cardList.length <= 0 }}" description="暂无数据" />
+  </view>
+
+</view>
+

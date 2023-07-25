@@ -1,20 +1,40 @@
 <!--index.wxml-->
-<view class="container">
-<view class = "icon-father">
-    <view id="icon-box-meishi">
-    <icon class="iconfont icon-meishi"></icon>
-      <view class="icon-box-title">美食</view>
-    </view>
+<van-search disabled value="{{ value }}" placeholder="请输入搜索关键词" bind:click-input="handleClickInput" />
 
-    <view id="icon-box-yinliao">
-    <icon class="iconfont icon-yinliao"></icon>
-      <view class="icon-box-title">饮品</view>
-    </view>
+<van-tabs active="{{ activeTab }}" bind:change="onChange" animated custom-class="my-tabs">
+    <van-tab title="美食">
+        <van-card wx:if="{{ foodCardList.length > 0 }}" wx:for="{{foodCardList}}" num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+            <view slot="desc" class="card-desc">{{item.description}}</view>
+            <view slot="footer">
+                <van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toDetail">查看详情</van-button>
+            </view>
+        </van-card>
+        <van-empty wx:if="{{ cardList.length <= 0 }}" description="暂无数据" />
+    </van-tab>
 
-    <view class="icon-box">
-    <icon class="iconfont icon-gengduo"></icon>
-      <view class="icon-box-title">更多</view>
-    </view>
-</view>
-<van-button type="default">默认按钮</van-button>
-</view>
+    <van-tab title="饮品">
+        <van-card wx:if="{{ cardList.length > 0 }}" wx:for="{{cardList}}" num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" 
+        title="{{item.title}}" thumb="{{item.pictureUrl }}">
+            <view slot="desc" class="card-desc">{{item.description}}</view>
+            <view slot="footer">
+                <van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toDetail">查看详情</van-button>
+            </view>
+        </van-card>
+        <van-empty wx:if="{{ cardList.length <= 0 }}" description="暂无数据" />
+    </van-tab>
+
+    <van-tab title="其它">
+        <van-card wx:if="{{ otherCardList.length > 0 }}" wx:for="{{otherCardList}}" num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+            <view slot="desc" class="card-desc">{{item.description}}</view>
+            <view slot="footer">
+                <van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toDetail">查看详情</van-button>
+            </view>
+        </van-card>
+        <van-empty wx:if="{{ otherCardList.length <= 0 }}" description="暂无数据" />
+    </van-tab>
+</van-tabs>
+
+<van-tabbar active="{{ active }}" bind:change="onChange">
+    <van-tabbar-item icon="home-o">主页</van-tabbar-item>
+    <van-tabbar-item icon="user-circle-o" bindtap="toProfile">我</van-tabbar-item>
+</van-tabbar>
