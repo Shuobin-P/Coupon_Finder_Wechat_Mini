@@ -113,6 +113,8 @@ Page({
 
     toVerification() {
         let temp = common.isMerchant();
+        console.log("是否相同")
+        console.log(temp)
         if (temp == true) {
             wx.showToast({
                 title: '已完成身份认证',

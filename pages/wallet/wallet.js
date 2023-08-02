@@ -18,10 +18,12 @@ Page({
     onShow() {
         //请求后台接口，传入用户的账号信息，返回该用户拥有的有效优惠券
         this.getInitAvailableCouponData()
-        this.getInitUsedCouponHistory()
     },
     onChange(event) {
         this.data.activeTab = event.detail.index;
+        if(this.data.activeTab == 1) {
+            this.getInitUsedCouponHistory()
+        }
     },
     getMoreAvailableCouponData() {
         if (!this.data.hasMore) {

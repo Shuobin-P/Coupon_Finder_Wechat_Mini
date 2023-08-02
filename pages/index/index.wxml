@@ -3,7 +3,7 @@
 
 <van-tabs active="{{ activeTab }}" bind:change="onChange" animated custom-class="my-tabs">
     <van-tab title="美食">
-        <van-card wx:if="{{ foodCardList.length > 0 }}" wx:for="{{foodCardList}}" num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+        <van-card wx:if="{{ foodCardList.length > 0 }}" wx:for="{{foodCardList}}" num="剩余数量：{{item.total_quantity-item.used_quantity-item.collected_quantity}}" origin-price="{{item.original_price}}" price="{{item.present_price}}" title="{{item.title}}" thumb="{{item.picture_url }}">
             <view slot="desc" class="card-desc">{{item.description}}</view>
             <view slot="footer">
                 <van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toDetail">查看详情</van-button>
@@ -13,8 +13,8 @@
     </van-tab>
 
     <van-tab title="饮品">
-        <van-card wx:if="{{ cardList.length > 0 }}" wx:for="{{cardList}}" num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" 
-        title="{{item.title}}" thumb="{{item.pictureUrl }}">
+        <van-card wx:if="{{ cardList.length > 0 }}" wx:for="{{cardList}}" num="剩余数量：{{item.total_quantity-item.used_quantity-item.collected_quantity}}" origin-price="{{item.original_price}}" price="{{item.present_price}}" 
+        title="{{item.title}}" thumb="{{item.picture_url }}">
             <view slot="desc" class="card-desc">{{item.description}}</view>
             <view slot="footer">
                 <van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toDetail">查看详情</van-button>
@@ -24,7 +24,7 @@
     </van-tab>
 
     <van-tab title="其它">
-        <van-card wx:if="{{ otherCardList.length > 0 }}" wx:for="{{otherCardList}}" num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+        <van-card wx:if="{{ otherCardList.length > 0 }}" wx:for="{{otherCardList}}" num="剩余数量：{{item.total_quantity-item.used_quantity-item.collected_quantity}}" origin-price="{{item.original_price}}" price="{{item.present_price}}" title="{{item.title}}" thumb="{{item.picture_url }}">
             <view slot="desc" class="card-desc">{{item.description}}</view>
             <view slot="footer">
                 <van-button type="warning" size="mini" data-id="{{ item.id }}" bindtap="toDetail">查看详情</van-button>

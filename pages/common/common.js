@@ -8,6 +8,9 @@ function isMerchant() {
 
 
 function js_date_time(unixtime) {
+    /**
+     * 时间戳单位是毫秒
+     */
     var dateTime = new Date(parseInt(unixtime))
     var year = dateTime.getFullYear();
     var month = dateTime.getMonth() + 1;

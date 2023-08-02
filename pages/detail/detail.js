@@ -113,12 +113,12 @@ Page({
             },
             success: res => {
                 wx.hideLoading();
-                if (res.data.code===200) {
+                if (res.statusCode===200) {
                     wx.showToast({
                         title: '领取成功',
                     });
                     // _this.onShow();
-                } else if(res.data.code===400){
+                } else if(res.statusCode===400){
                     wx.showToast({
                         title: "您已经领取该优惠券，不能重复领取哦！",
                         icon: 'none',
@@ -144,17 +144,17 @@ Page({
             success(res) {
                 wx.hideLoading();
                 _this.setData({
-                    bannerImages: [res.data.data.pictureUrl],
+                    bannerImages: [res.data.data.picture_url],
                     title: res.data.data.title,
-                    presentPrice: res.data.data.presentPrice,
-                    originalPrice: res.data.data.originalPrice,
-                    usedQuantity: res.data.data.usedQuantity,
-                    totalQuantity: res.data.data.totalQuantity,
-                    collectedQuantity: res.data.data.collectedQuantity,
+                    presentPrice: res.data.data.present_price,
+                    originalPrice: res.data.data.original_price,
+                    usedQuantity: res.data.data.used_quantity,
+                    totalQuantity: res.data.data.total_quantity,
+                    collectedQuantity: res.data.data.collected_quantity,
                     detailImages: res.data.data.images,
                     address: res.data.data.address,
-                    startDate: common.js_date_time(res.data.data.startDate),
-                    expireDate: common.js_date_time(res.data.data.expireDate)
+                    startDate: common.js_date_time(res.data.data.start_date),
+                    expireDate: common.js_date_time(res.data.data.expire_date)
                 })
             },
             fail(err) {

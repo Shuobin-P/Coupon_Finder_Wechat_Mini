@@ -68,25 +68,18 @@ Page({
      * 提交用户输入的信息
      */
     onCommit() {
-        console.log(this.data.key);
-        console.log("缓存中的token: " + wx.getStorageSync('token'));
         wx.request({
             //商家确认并扣除该优惠券
             url: app.globalData.url + "/merchant/verify?key=" + this.data.key,
             header: {
                 'Authorization': wx.getStorageSync('token')
             },
-
             success: res => {
-                console.log(res.data);
-                if (res.data.code == 0) {
+                if (res.data.data.code == 0) {
                     wx.showToast({
                         title: '密钥错误 请重试',
                     })
-                } else if (res.data.code == 1) {
-                    console.log("res.data的值为");
-                    console.log(res.data);
-                    //FIXME 这里有点问题
+                } else if (res.data.data.code == 1) {
                     wx.setStorageSync('token', `${res.data.data.token}`);
                     wx.showToast({
                         title: '已完成商家认证，快去发布优惠券吧！',
