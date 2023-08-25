@@ -5,11 +5,11 @@
 
         <van-field model:value="{{ description }}" required clearable label="产品描述" placeholder="请输入优惠券对于产品的描述" />
 
-        <van-field model:value="{{ quantity }}" type="number" label="发布数量" placeholder="请输入数量" required border="{{ false }}" />
+        <van-field model:value="{{ total_quantity }}" type="number" label="发布数量" placeholder="请输入数量" required border="{{ false }}" />
 
-        <van-field model:value="{{ originalPrice }}" type="number" label="原价" placeholder="请输入原价" required border="{{ false }}" />
+        <van-field model:value="{{ original_price }}" type="number" label="原价" placeholder="请输入原价" required border="{{ false }}" />
 
-        <van-field model:value="{{ presentPrice }}" type="number" label="优惠后的价格" placeholder="请输入减免后的价格" required border="{{ false }}" />
+        <van-field model:value="{{ present_price }}" type="number" label="优惠后的价格" placeholder="请输入减免后的价格" required border="{{ false }}" />
     </van-cell-group>
 
     <van-picker show-toolbar title="选择分类" visible-item-count="2" columns="{{ columns }}" bind:cancel="onCancel" bind:confirm="onConfirm" />
@@ -24,9 +24,9 @@
         <van-uploader file-list="{{ detailList }}" max-count="3" bind:after-read="detailAfterRead" deletable="true" preview-image="true"/>
     </view>
 
-    <van-datetime-picker type="date" title="优惠券开始生效时间" value="{{ startDate }}" bind:input="onInputStartDate" min-date="{{ minDate }}" formatter="{{ formatter }}" visible-item-count="3" />
+    <van-datetime-picker type="date" title="优惠券开始生效时间" value="{{ start_date }}" bind:input="onInputStartDate" min-date="{{ minDate }}" formatter="{{ formatter }}" visible-item-count="3" />
 
-    <van-datetime-picker type="date" title="优惠券失效时间" value="{{ expireDate }}" bind:input="onInputExpireDate" min-date="{{ minDate }}" formatter="{{ formatter }}" visible-item-count="3" />
+    <van-datetime-picker type="date" title="优惠券失效时间" value="{{ expire_date }}" bind:input="onInputExpireDate" min-date="{{ minDate }}" formatter="{{ formatter }}" visible-item-count="3" />
 
     <van-button type="primary" class="commit_button" bindtap="onCommit">提交</van-button>
 
