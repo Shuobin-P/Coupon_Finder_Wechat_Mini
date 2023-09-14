@@ -1,4 +1,5 @@
 // pages/merchant/merchant.js
+const app = getApp();
 var common = require('../common/common.js');
 Page({
 
@@ -13,7 +14,20 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        // 获取商家当前shop_id
+        wx.request({
+            url:  app.globalData.url + "/merchant/getCurrentShopID",
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
+            success: (res) => {
+                if (res.data.data.current_shop_id != null) {
+                    wx.setStorageSync('current_shop_id', res.data.data.current_shop_id)
+                } else {
+                    wx.setStorageSync('current_shop_id', 0)
+                }
+            }
+        })
     },
 
     /**
@@ -113,8 +127,6 @@ Page({
 
     toVerification() {
         let temp = common.isMerchant();
-        console.log("是否相同")
-        console.log(temp)
         if (temp == true) {
             wx.showToast({
                 title: '已完成身份认证',
