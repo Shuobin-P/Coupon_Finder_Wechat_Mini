@@ -10,12 +10,12 @@
                 <van-card 
                 desc="{{item.description}}" 
                 num="1" 
-                price="{{item.originalPrice - item.presentPrice}}" 
+                price="{{item.original_price - item.present_price}}" 
                 title="{{item.title}}" 
-                thumb="{{ item.pictureUrl }}" >
+                thumb="{{ item.picture_url }}" >
                     <view slot="footer">
                         <van-button size="mini" type="primary" bind:click="onGetQRCode" data-coupon_id="{{item.id}}" data-wallet_id="{{walletID}}">二维码</van-button>
-                        <view class="expiry-date">有效期至：{{item.expireDate}}</view>
+                        <view class="expiry-date">有效期至：{{item.expire_date}}</view>
                     </view>
                 </van-card>
             </van-cell-group>
@@ -33,9 +33,9 @@
         <van-swipe-cell right-width="{{ 0 }}" left-width="{{ 0 }}" wx:for="{{usedCouponList}}" >
             <view slot="left">选择</view>
             <van-cell-group>
-                <van-card desc="{{item.description}}" num="1" price="{{item.originalPrice - item.presentPrice}}" title="{{item.title}}" thumb="{{ item.pictureUrl }}" >
+                <van-card desc="{{item.description}}" num="1" price="{{item.original_price - item.present_price}}" title="{{item.title}}" thumb="{{ item.picture_url }}" >
                     <view slot="footer">
-                       <text>使用日期:{{ item.ts }}</text>
+                       <text>使用日期:{{ item.used_ts }}</text>
                     </view>
                 </van-card>
             </van-cell-group>

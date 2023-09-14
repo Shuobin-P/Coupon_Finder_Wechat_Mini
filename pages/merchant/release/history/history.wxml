@@ -27,7 +27,7 @@
             <view slot="left">选择</view>
             <van-cell-group>
                 <van-card 
-                num="剩余数量：{{item.totalQuantity-item.usedQuantity-item.collectedQuantity}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+                num="剩余数量：{{item.remaining_quantity}}" origin-price="{{item.original_price}}" price="{{item.present_price}}" title="{{item.title}}" thumb="{{item.picture_url }}">
                 <view slot="tag" wx:if="{{item.status === 3}}" class="card-tag">已停止发放</view>
                 <view slot="desc" class="card-desc">{{item.description}}</view>
                 </van-card>
@@ -43,7 +43,7 @@
     </van-tab>
 
     <van-tab title="已过期">
-        <van-card wx:if="{{ expiredCouponList.length > 0 }}" wx:for="{{expiredCouponList}}" origin-price="{{item.originalPrice}}" price="{{item.presentPrice}}" title="{{item.title}}" thumb="{{item.pictureUrl }}">
+        <van-card wx:if="{{ expiredCouponList.length > 0 }}" wx:for="{{expiredCouponList}}" origin-price="{{item.original_price}}" price="{{item.present_price}}" title="{{item.title}}" thumb="{{item.picture_url }}">
             <view slot="desc" class="card-desc">{{item.description}}</view>
         </van-card>
         <van-empty wx:if="{{ expiredCouponList.length <= 0 }}" description="暂无数据" />

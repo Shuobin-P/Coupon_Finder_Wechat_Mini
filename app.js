@@ -22,7 +22,7 @@ App({
                     method: "POST",
                     success: res => {
                         wx.hideLoading();
-                        if(res.data.code !="200") {
+                        if(res.statusCode !="200") {
                             return wx.showToast({
                                 title: res.data.message,
                                 icon: 'error',
@@ -39,7 +39,7 @@ App({
         })
     },
     globalData: {
-        url: "http://localhost:8080",
-        qiniuImgPrefix: "http://rtxlr46aj.hn-bkt.clouddn.com/"
+        url: "http://localhost:5000",
+        qiniuImgPrefix: "http://shuobin.tech"
     }
 })

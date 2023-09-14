@@ -9,18 +9,18 @@ Page({
     data: {
         title: "",
         description: "",
-        quantity: "",
-        originalPrice: "",
-        presentPrice: "",
+        total_quantity: "",
+        original_price: "",
+        present_price: "",
         columns: ['美食', '饮品', '其它'],
         category: "",
         fileList: [],
         detailList: [],
-        productURL: "",
-        productDetailURL: [],
-        startDate: new Date().getTime(),
+        product_img: "",
+        product_detail_img: [],
+        start_date: new Date().getTime(),
         minDate: new Date().getTime(),
-        expireDate: new Date().getTime(),
+        expire_date: new Date().getTime(),
         formatter(type, value) {
             if (type === 'year') {
                 return `${value}年`;
@@ -93,12 +93,12 @@ Page({
 
     onInputStartDate(event) {
         this.setData({
-            startDate: event.detail,
+            start_date: event.detail,
         });
     },
     onInputExpireDate(event) {
         this.setData({
-            expireDate: event.detail,
+            expire_date: event.detail,
         });
     },
 
@@ -115,6 +115,9 @@ Page({
             formData: {
                 user: 'test'
             },
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
             success(res) {
                 // 上传完成需要更新 fileList
                 const {
@@ -126,7 +129,7 @@ Page({
                 });
                 _this.setData({
                     fileList,
-                    productURL: JSON.parse(res.data).data
+                    product_img: JSON.parse(res.data).data
                 });
 
             },
@@ -149,6 +152,9 @@ Page({
             formData: {
                 user: 'test'
             },
+            header: {
+                'Authorization': wx.getStorageSync('token')
+            },
             success(res) {
                 // 上传完成需要更新 fileList
                 // FIXME 上传多张图片要对detailList进行拼接。
@@ -162,7 +168,7 @@ Page({
                 _this.setData({
                     detailList: _this.data.detailList.concat(detailList),
                 });
-                _this.data.productDetailURL.push(JSON.parse(res.data).data);
+                _this.data.product_detail_img.push(JSON.parse(res.data).data);
             },
             fail(res) {
                 console.log("上传失败");
@@ -186,19 +192,26 @@ Page({
             data: {
                 title: this.data.title,
                 description: this.data.description,
-                quantity: this.data.quantity,
-                originalPrice: this.data.originalPrice,
-                presentPrice: this.data.presentPrice,
+                total_quantity: this.data.total_quantity,
+                original_price: this.data.original_price,
+                present_price: this.data.present_price,
                 category: this.data.category,
-                productURL: this.data.productURL,
-                productDetailURL: this.data.productDetailURL,
-                startDate: this.data.startDate,
-                expireDate: this.data.expireDate
+                product_img: this.data.product_img,
+                product_detail_img: this.data.product_detail_img,
+                start_date: this.data.start_date,
+                expire_date: this.data.expire_date
             },
             success(res) {
-               wx.showToast({
-                 title: '成功发布新优惠券',
-               })
+                if(res.data.data.code == 1) {
+                    wx.showToast({
+                        title: '成功发布新优惠券',
+                    })
+                }
+                else {
+                    wx.showToast({
+                        title: '发布失败',
+                    })
+                }
             }
     })
 },

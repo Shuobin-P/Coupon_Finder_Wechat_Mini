@@ -77,6 +77,7 @@ Page({
             },
             success(res) {
                 wx.hideLoading();
+
                 _this.setData({
                     ["cardList"]: res.data.data,
                     ["hasMore"]: res.data.data.length >= _this.data.pageSize,
