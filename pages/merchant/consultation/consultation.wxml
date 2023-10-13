@@ -1,0 +1,19 @@
+<!-- WXML -->
+<view class="weui-chat">
+  <view class="weui-chat-item">
+    <view class="holy-grail-left">
+        <image class="weui-chat-icon" src="https://gw.alicdn.com/i1/710600684/O1CN01OwjnvQ1GvJkcNOcpb_!!710600684.jpg_Q75.jpg_.webp" />
+    </view>
+    <view class="holy-grail-middle">
+        <view class="weui-chat-inner">
+            <text class="weui-chat-name">小爱同学</text>
+            <view class="weui-chat-text">你好，我是小爱同学，很高兴见到你</view>
+        </view>
+    </view>
+    <view class="holy-grail-right">
+      <view class="weui-chat-time">09:41</view>
+      <view class="weui-badge">3</view>
+    </view>
+
+  </view>
+</view>

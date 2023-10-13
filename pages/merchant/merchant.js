@@ -159,5 +159,27 @@ Page({
                 title: '请先完成商家身份验证',
             })
         }
+    },
+    toShops() {
+        if (common.isMerchant()) {
+            wx.navigateTo({
+                url: './shops/shops',
+            })
+        } else {
+            wx.showToast({
+                title: '请先完成商家身份验证',
+            })
+        }
+    },
+    toConsultation() {
+        if (common.isMerchant()) {
+            wx.navigateTo({
+                url: './consultation/consultation',
+            })
+        } else {
+            wx.showToast({
+                title: '请先完成商家身份验证',
+            })
+        }
     }
 })

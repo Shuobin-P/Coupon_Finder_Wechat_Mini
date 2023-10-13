@@ -4,7 +4,7 @@
     <view class="" bindtap="toRelease"><text>发布优惠券</text></view>
     <view class="" bindtap="toReleaseHistory"><text>优惠券发布记录</text></view>
     <view class="" bindtap="toScanQRcode"><text>扫描二维码</text></view>
-    <view class="" bindtap=""><text>顾客咨询</text></view>
-    <view class="" bindtap=""><text>我的店铺</text></view>
+    <view class="" bindtap="toConsultation"><text>顾客咨询</text></view>
+    <view class="" bindtap="toShops"><text>我的店铺</text></view>
 
 </view>

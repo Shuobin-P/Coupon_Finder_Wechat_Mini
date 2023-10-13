@@ -10,7 +10,9 @@
         "pages/merchant/verification/verification",
         "pages/merchant/release/release",
         "pages/index/search/search",
-        "pages/merchant/release/history/history"
+        "pages/merchant/release/history/history",
+        "pages/merchant/shops/shops",
+        "pages/merchant/consultation/consultation"
     ],
     "window": {
         "backgroundTextStyle": "light",
