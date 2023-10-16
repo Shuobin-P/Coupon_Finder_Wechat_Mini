@@ -6,12 +6,22 @@ Page({
      */
     data: {
         // 假设 unreadCount 为未读消息数
-        unreadCount: 5,
         chatList: [
             {
                 avatar: "https://gw.alicdn.com/i1/710600684/O1CN01OwjnvQ1GvJkcNOcpb_!!710600684.jpg_Q75.jpg_.webp",
-                name: "小爱同学"
+                name: "小爱同学",
+                latestMsg: "你好，我是小爱同学，很高兴见到你，爱你呦",
+                ts: "09:40",
+                unreadMsgCount: 5
+            },
+            {
+                avatar: "https://img95.699pic.com/photo/40250/6425.jpg_wh300.jpg",
+                name: "Kate",
+                latestMsg: "你好，我是Kate同学，很高兴见到你，爱你呦",
+                ts: "09:40",
+                unreadMsgCount: 0
             }
+
         ]
       },
 

@@ -1,12 +1,15 @@
 /* WXSS */
 .weui-chat {
     display: flex;
+    flex-direction: column;
     align-items: center;
     margin-bottom: 10px;
+    background-color: red;
 }
 .weui-chat-item {
-    width: 100%;
-    background-color: rgb(196, 224, 224);
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(192, 216, 192);
 }
 .holy-grail-left{
     height: 40px;
@@ -18,13 +21,13 @@
 .holy-grail-right{
     float: left
 }
-  .weui-chat-icon {
+.weui-chat-icon {
     width: 40px;
     height: 40px;
     border-radius: 40px;
-  }
+}
   
-  .weui-chat-inner {
+.weui-chat-inner {
     max-width: 80%;
     padding: 10px;
     margin-left: 10px;
